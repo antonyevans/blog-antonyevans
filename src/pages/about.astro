@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Layout title="About | Anton Yevans" description="About Anton Yevans and this blog.">
+  <SiteHeader />
+  <main class="container about">
+    <article class="surface">
+      <h1>About</h1>
+      <p>I am Anton Yevans. This site is my public notebook for software engineering, product development, and writing workflows.</p>
+      <p>Expect practical lessons from real projects, deployment notes, and occasional long-form essays.</p>
+      <p>You can subscribe via <a href="/rss.xml">RSS</a> or follow the latest posts on the blog homepage.</p>
+    </article>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .about { padding: 2rem 0; }
+  article { max-width: 48rem; margin: 0 auto; padding: 1.5rem; }
+  h1 { margin-top: 0; }
+</style>

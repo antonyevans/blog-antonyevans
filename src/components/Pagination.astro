@@ -1,0 +1,31 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  basePath: string;
+}
+
+const { currentPage, totalPages, basePath } = Astro.props;
+const buildUrl = (page: number) => `${basePath}${page}/`;
+---
+
+{totalPages > 1 && (
+  <nav class="pagination" aria-label="Pagination">
+    <a class="chip" href={buildUrl(Math.max(1, currentPage - 1))} aria-disabled={currentPage === 1}>Prev</a>
+    <p>Page {currentPage} of {totalPages}</p>
+    <a class="chip" href={buildUrl(Math.min(totalPages, currentPage + 1))} aria-disabled={currentPage === totalPages}>Next</a>
+  </nav>
+)}
+
+<style>
+  .pagination {
+    margin-top: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .pagination p { margin: 0; color: var(--muted); }
+  .pagination a[aria-disabled='true'] { pointer-events: none; opacity: 0.5; }
+</style>

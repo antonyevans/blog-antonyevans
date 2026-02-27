@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import PostCard from '../../components/PostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import { getPublishedPosts, pageNumbers, paginateArray } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const { totalPages } = paginateArray(posts, 1);
+  return pageNumbers(totalPages)
+    .filter((page) => page > 1)
+    .map((page) => ({ params: { page: String(page) } }));
+}
+
+const allPosts = await getPublishedPosts();
+const currentPage = Number(Astro.params.page ?? '1');
+const { items, totalPages } = paginateArray(allPosts, currentPage);
+---
+
+<Layout title={`Blog page ${currentPage} | Anton Yevans`} description="Paginated blog archive." canonical={`/blog/${currentPage}/`}>
+  <SiteHeader />
+  <main class="container listing">
+    <h1>Blog archive</h1>
+    <div class="post-list">
+      {items.map((post) => <PostCard post={post} />)}
+    </div>
+    <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/blog/" />
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .listing { padding: 2rem 0; }
+  .post-list { display: grid; gap: 0.8rem; }
+</style>

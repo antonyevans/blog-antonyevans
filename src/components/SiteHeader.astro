@@ -1,0 +1,44 @@
+<header class="site-header">
+  <div class="container inner">
+    <a class="brand" href="/">Anton Yevans</a>
+    <nav>
+      <a href="/blog/">Blog</a>
+      <a href="/search/">Search</a>
+      <a href="/about/">About</a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    background: color-mix(in oklab, var(--bg) 82%, white 18%);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .inner {
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  nav { display: flex; gap: 1rem; }
+  nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+
+  @media (max-width: 720px) {
+    .inner { flex-direction: column; padding: 0.8rem 0; }
+  }
+</style>

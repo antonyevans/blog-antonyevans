@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getPostUrl, slugify } from '../lib/content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const postUrl = getPostUrl(post);
+---
+
+<article class="surface post-card">
+  <p class="meta">
+    <a class="chip" href={`/blog/category/${post.data.category}/1/`}>{post.data.category}</a>
+    <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}</time>
+  </p>
+  <h2><a href={postUrl}>{post.data.title}</a></h2>
+  <p>{post.data.description}</p>
+  <div class="tags">
+    {post.data.tags.map((tag) => (
+      <a class="chip" href={`/blog/tag/${slugify(tag)}/1/`}>#{tag}</a>
+    ))}
+  </div>
+</article>
+
+<style>
+  .post-card {
+    padding: 1.2rem;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .post-card h2 { margin: 0; font-size: 1.4rem; }
+  .post-card h2 a { text-decoration: none; color: var(--text); }
+  .post-card p { margin: 0; color: var(--muted); }
+
+  .meta {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+</style>

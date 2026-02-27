@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import PostCard from '../../components/PostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import SearchBox from '../../components/SearchBox.astro';
+import { getPublishedPosts, paginateArray } from '../../lib/content';
+
+const allPosts = await getPublishedPosts();
+const { items, totalPages } = paginateArray(allPosts, 1);
+---
+
+<Layout title="Blog | Anton Yevans" description="All blog posts by Anton Yevans." canonical="/blog/">
+  <SiteHeader />
+  <main class="container blog-index">
+    <section class="surface intro">
+      <h1>Blog</h1>
+      <p>Posts grouped by category and tags, with searchable archives.</p>
+    </section>
+
+    <SearchBox inputId="search-home" />
+    <div id="search-results"></div>
+
+    <section class="post-list">
+      {items.map((post) => <PostCard post={post} />)}
+      <Pagination currentPage={1} totalPages={totalPages} basePath="/blog/" />
+    </section>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .blog-index { padding: 2rem 0; display: grid; gap: 1rem; }
+  .intro { padding: 1.2rem; }
+  .intro h1 { margin: 0; }
+  .intro p { margin: 0.35rem 0 0; color: var(--muted); }
+  .post-list { display: grid; gap: 0.8rem; }
+</style>

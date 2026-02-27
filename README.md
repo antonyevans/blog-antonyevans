@@ -1,55 +1,75 @@
 # blog-antonyevans
 
-Astro static site configured for deployment to Cloudflare Pages.
+Minimal editorial blog built with Astro and deployed to Cloudflare Pages.
 
-## 🚀 Project Structure
+## Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+- Astro (static output)
+- Astro Content Collections (`src/content/blog`)
+- Markdown + MDX posts
+- Cloudflare Pages deployment via Wrangler
+- RSS + sitemap + client-side static search
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Commands
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- `npm install` install dependencies
+- `npm run dev` start local development server
+- `npm run build` build static site to `dist/`
+- `npm run preview` preview build output locally
+- `npm run deploy:pages` deploy `dist/` to Cloudflare Pages
 
-## 🧞 Commands
+## Content Authoring
 
-All commands are run from the root of the project, from a terminal:
+Posts live in `src/content/blog/`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run deploy:pages`    | Deploy `./dist` to Cloudflare Pages              |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Use `.md` for standard articles and `.mdx` when you need embedded components.
 
-## ☁️ Cloudflare Pages (CLI)
+Required frontmatter fields:
 
-1. Log in to Cloudflare:
-```sh
-npx wrangler login
-```
-2. Create the Pages project once:
-```sh
-npx wrangler pages project create blog-antonyevans --production-branch main
-```
+- `title`
+- `description`
+- `pubDate`
+- `category` (one of: `engineering`, `product`, `writing`, `notes`)
+- `tags` (non-empty array)
+- `draft` (boolean)
+
+Optional fields:
+
+- `updatedDate`
+- `heroImage`
+- `heroImageAlt`
+
+Permalink format:
+
+- `/blog/<category>/<slug>/`
+
+## Mixed Media in MDX
+
+Import reusable components:
+
+- `Figure` from `src/components/content/Figure.astro`
+- `VideoEmbed` from `src/components/content/VideoEmbed.astro`
+- `ImageCarousel` from `src/components/content/ImageCarousel.astro`
+
+See `src/content/blog/media-rich-post-example.mdx` for usage.
+
+## Search, Feeds, SEO
+
+- Search index generated at `/search-index.json`
+- Search UI at `/search/`
+- RSS feed at `/rss.xml`
+- Sitemap generated automatically by `@astrojs/sitemap`
+
+## Cloudflare Setup
+
+1. Authenticate:
+   - `npx wrangler login`
+2. Create project (first run only):
+   - `npx wrangler pages project create blog-antonyevans --production-branch main`
 3. Build and deploy:
-```sh
-npm run build
-npm run deploy:pages
-```
+   - `npm run build`
+   - `npm run deploy:pages`
+
+Optional analytics token:
+
+- Set `PUBLIC_CF_ANALYTICS_TOKEN` in your environment (see `.env.example`).

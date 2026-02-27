@@ -1,0 +1,86 @@
+---
+interface Slide {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  slides: Slide[];
+}
+
+const { slides } = Astro.props;
+const id = `carousel-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class="carousel" id={id}>
+  <button class="control prev" type="button" aria-label="Previous image">‹</button>
+  <div class="track">
+    {slides.map((slide) => (
+      <img src={slide.src} alt={slide.alt} loading="lazy" />
+    ))}
+  </div>
+  <button class="control next" type="button" aria-label="Next image">›</button>
+</div>
+
+<script>
+  const root = document.currentScript?.previousElementSibling;
+  if (!root) throw new Error('Carousel root not found.');
+
+  const track = root.querySelector('.track');
+  const prev = root.querySelector('.prev');
+  const next = root.querySelector('.next');
+  const slides = Array.from(root.querySelectorAll('img'));
+  let index = 0;
+
+  function update() {
+    if (!track) return;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  prev?.addEventListener('click', () => {
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  });
+
+  next?.addEventListener('click', () => {
+    index = (index + 1) % slides.length;
+    update();
+  });
+</script>
+
+<style>
+  .carousel {
+    margin: 1.6rem 0;
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 0.8rem;
+    overflow: hidden;
+  }
+
+  .track {
+    display: flex;
+    transition: transform 0.35s ease;
+  }
+
+  .track img {
+    width: 100%;
+    flex: 0 0 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 999px;
+    width: 2rem;
+    height: 2rem;
+    background: color-mix(in oklab, var(--paper) 80%, white 20%);
+    cursor: pointer;
+  }
+
+  .prev { left: 0.6rem; }
+  .next { right: 0.6rem; }
+</style>

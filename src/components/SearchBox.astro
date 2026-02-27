@@ -1,0 +1,100 @@
+---
+interface Props {
+  inputId?: string;
+}
+
+const { inputId = 'search-input' } = Astro.props;
+---
+
+<section class="surface search-box">
+  <label for={inputId}>Search posts</label>
+  <input id={inputId} type="search" placeholder="Title, tag, category..." autocomplete="off" />
+  <p class="hint">Results update as you type.</p>
+</section>
+
+<script>
+  const root = document.currentScript?.previousElementSibling;
+  if (!root) {
+    throw new Error('Search box root not found.');
+  }
+
+  const input = root.querySelector('input');
+  const results = document.getElementById('search-results');
+
+  async function loadIndex() {
+    const response = await fetch('/search-index.json');
+    return await response.json();
+  }
+
+  function render(items, query) {
+    if (!results) return;
+    const normalized = query.trim().toLowerCase();
+    const filtered = !normalized
+      ? items.slice(0, 12)
+      : items.filter((item) => {
+          return [item.title, item.description, item.category, ...(item.tags || [])]
+            .join(' ')
+            .toLowerCase()
+            .includes(normalized);
+        });
+
+    results.innerHTML = filtered.length
+      ? filtered
+          .slice(0, 50)
+          .map(
+            (item) =>
+              `<article class="surface result"><h3><a href="${item.url}">${item.title}</a></h3><p>${item.description}</p><p class="meta">${item.category} · ${item.tags.join(', ')}</p></article>`
+          )
+          .join('')
+      : '<p>No matches yet.</p>';
+  }
+
+  let index = [];
+  loadIndex()
+    .then((items) => {
+      index = items;
+      render(index, '');
+    })
+    .catch(() => {
+      if (results) {
+        results.innerHTML = '<p>Search index failed to load.</p>';
+      }
+    });
+
+  input?.addEventListener('input', () => render(index, input.value));
+</script>
+
+<style>
+  .search-box {
+    padding: 1rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  label { font-weight: 700; }
+
+  input {
+    border: 1px solid var(--line);
+    border-radius: 0.7rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 1rem;
+  }
+
+  .hint {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  :global(#search-results) {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  :global(.result) { padding: 1rem; }
+  :global(.result h3) { margin: 0 0 0.25rem; }
+  :global(.result h3 a) { color: var(--text); text-decoration: none; }
+  :global(.result p) { margin: 0; color: var(--muted); }
+  :global(.result .meta) { margin-top: 0.45rem; font-size: 0.86rem; }
+</style>

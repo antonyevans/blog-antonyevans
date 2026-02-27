@@ -1,0 +1,36 @@
+---
+import { getPublishedPosts, getPostUrl } from '../../../lib/content';
+import PostLayout from '../../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({
+    params: { category: post.data.category, slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<PostLayout
+  title={post.data.title}
+  description={post.data.description}
+  pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
+  category={post.data.category}
+  tags={post.data.tags}
+  canonical={getPostUrl(post)}>
+  {post.data.heroImage && (
+    <figure>
+      <img src={post.data.heroImage} alt={post.data.heroImageAlt || ''} />
+    </figure>
+  )}
+  <Content />
+</PostLayout>
+
+<style>
+  figure { margin: 0 0 1.2rem; }
+  figure img { width: 100%; border: 1px solid var(--line); border-radius: 0.9rem; }
+</style>

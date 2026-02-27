@@ -10,6 +10,9 @@
     "deploy:pages": "wrangler pages deploy dist --project-name blog-antonyevans"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.17.1"
   },
   "devDependencies": {

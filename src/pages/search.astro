@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SearchBox from '../components/SearchBox.astro';
+---
+
+<Layout title="Search | Anton Yevans" description="Search blog posts." canonical="/search/">
+  <SiteHeader />
+  <main class="container search-page">
+    <h1>Search</h1>
+    <SearchBox inputId="search-page" />
+    <div id="search-results"></div>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .search-page { padding: 2rem 0; }
+  .search-page h1 { margin-top: 0; }
+</style>

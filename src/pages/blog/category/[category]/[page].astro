@@ -1,0 +1,47 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooter from '../../../../components/SiteFooter.astro';
+import PostCard from '../../../../components/PostCard.astro';
+import Pagination from '../../../../components/Pagination.astro';
+import { getPublishedPosts, paginateArray, pageNumbers } from '../../../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const categories = Array.from(new Set(posts.map((post) => post.data.category)));
+  const paths = [];
+
+  for (const category of categories) {
+    const filtered = posts.filter((post) => post.data.category === category);
+    const { totalPages } = paginateArray(filtered, 1);
+    for (const page of pageNumbers(totalPages)) {
+      paths.push({ params: { category, page: String(page) } });
+    }
+  }
+
+  return paths;
+}
+
+const category = Astro.params.category ?? '';
+const currentPage = Number(Astro.params.page ?? '1');
+const allPosts = await getPublishedPosts();
+const categoryPosts = allPosts.filter((post) => post.data.category === category);
+const { items, totalPages } = paginateArray(categoryPosts, currentPage);
+---
+
+<Layout title={`${category} posts | Anton Yevans`} description={`Posts in ${category}.`} canonical={`/blog/category/${category}/${currentPage}/`}>
+  <SiteHeader />
+  <main class="container listing">
+    <h1>Category: {category}</h1>
+    <div class="post-list">
+      {items.map((post) => <PostCard post={post} />)}
+    </div>
+    <Pagination currentPage={currentPage} totalPages={totalPages} basePath={`/blog/category/${category}/`} />
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .listing { padding: 2rem 0; }
+  .post-list { display: grid; gap: 0.8rem; }
+</style>

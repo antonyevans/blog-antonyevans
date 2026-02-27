@@ -1,0 +1,74 @@
+---
+import Layout from './Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  category: string;
+  tags: string[];
+  canonical: string;
+}
+
+const { title, description, pubDate, updatedDate, category, tags, canonical } = Astro.props;
+---
+
+<Layout title={`${title} | Anton Yevans`} description={description} canonical={canonical}>
+  <SiteHeader />
+  <main class="container post-main">
+    <article class="surface prose">
+      <header>
+        <p class="meta">
+          <a class="chip" href={`/blog/category/${category}/1/`}>{category}</a>
+          <time datetime={pubDate.toISOString()}>{pubDate.toLocaleDateString('en-US', { dateStyle: 'long' })}</time>
+          {updatedDate && <span>Updated {updatedDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}</span>}
+        </p>
+        <h1>{title}</h1>
+        <p class="dek">{description}</p>
+      </header>
+      <slot />
+      <footer class="tags">
+        {tags.map((tag) => (
+          <a class="chip" href={`/blog/tag/${tag.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/1/`}>#{tag}</a>
+        ))}
+      </footer>
+    </article>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .post-main { padding: 2rem 0; }
+  .prose { max-width: 52rem; margin: 0 auto; padding: 1.6rem; }
+  .meta {
+    margin: 0;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+
+  h1 { margin: 0.85rem 0 0.6rem; font-size: clamp(2rem, 5vw, 3rem); }
+  .dek { color: var(--muted); margin: 0 0 1rem; }
+  .tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+  }
+
+  :global(.prose p) { margin: 0.9rem 0; }
+  :global(.prose h2) { margin-top: 1.6rem; }
+  :global(.prose code) {
+    background: #efe8de;
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.35rem;
+  }
+</style>

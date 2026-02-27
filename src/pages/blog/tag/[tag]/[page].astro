@@ -1,0 +1,47 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooter from '../../../../components/SiteFooter.astro';
+import PostCard from '../../../../components/PostCard.astro';
+import Pagination from '../../../../components/Pagination.astro';
+import { getPublishedPosts, paginateArray, pageNumbers, slugify } from '../../../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags.map((tag) => slugify(tag)))));
+  const paths = [];
+
+  for (const tag of tags) {
+    const filtered = posts.filter((post) => post.data.tags.some((item) => slugify(item) === tag));
+    const { totalPages } = paginateArray(filtered, 1);
+    for (const page of pageNumbers(totalPages)) {
+      paths.push({ params: { tag, page: String(page) } });
+    }
+  }
+
+  return paths;
+}
+
+const tag = Astro.params.tag ?? '';
+const currentPage = Number(Astro.params.page ?? '1');
+const allPosts = await getPublishedPosts();
+const taggedPosts = allPosts.filter((post) => post.data.tags.some((item) => slugify(item) === tag));
+const { items, totalPages } = paginateArray(taggedPosts, currentPage);
+---
+
+<Layout title={`#${tag} posts | Anton Yevans`} description={`Posts tagged ${tag}.`} canonical={`/blog/tag/${tag}/${currentPage}/`}>
+  <SiteHeader />
+  <main class="container listing">
+    <h1>Tag: #{tag}</h1>
+    <div class="post-list">
+      {items.map((post) => <PostCard post={post} />)}
+    </div>
+    <Pagination currentPage={currentPage} totalPages={totalPages} basePath={`/blog/tag/${tag}/`} />
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .listing { padding: 2rem 0; }
+  .post-list { display: grid; gap: 0.8rem; }
+</style>
