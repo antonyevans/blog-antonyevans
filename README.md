@@ -66,9 +66,23 @@ See `src/content/blog/media-rich-post-example.mdx` for usage.
    - `npx wrangler login`
 2. Create project (first run only):
    - `npx wrangler pages project create blog-antonyevans --production-branch main`
-3. Build and deploy:
+3. Build and deploy manually (fallback):
    - `npm run build`
    - `npm run deploy:pages`
+
+## Automatic Deployments (Git Push/PR)
+
+This repository includes a GitHub Actions workflow at `.github/workflows/pages-auto-deploy.yml`:
+
+- Push to `main` -> automatic production deployment.
+- Open/update a pull request -> automatic preview deployment.
+
+Required GitHub repository secrets:
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+After these secrets are configured, `git push` to `main` will automatically publish to the live site.
 
 Optional analytics token:
 
