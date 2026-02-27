@@ -4,14 +4,18 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 ---
 
-<Layout title="About | Anton Yevans" description="About Anton Yevans and this blog.">
+<Layout title="About | Antony Evans" description="DTC operator turned AI builder. 7 years COO at Wild Earth. YC, INSEAD, Cambridge.">
   <SiteHeader />
   <main class="container about">
     <article class="surface">
       <h1>About</h1>
-      <p>I am Anton Yevans. This site is my public notebook for software engineering, product development, and writing workflows.</p>
-      <p>Expect practical lessons from real projects, deployment notes, and occasional long-form essays.</p>
-      <p>You can subscribe via <a href="/rss.xml">RSS</a> or follow the latest posts on the blog homepage.</p>
+      <p>Most DTC commentary is tactical. Most AI commentary is generic. I&#39;m interested in what happens at the intersection.</p>
+      <p>I spent 7 years as COO scaling a DTC consumer brand &mdash; $50M revenue, $42M raised, led the company through Chapter 11 to profitability. Before that: YC, Bain, INSEAD, and a decade founding things (including an AI doctor app with 500k downloads). Now I&#39;m building AI systems and watching everything I learned about commerce change at the infrastructure level.</p>
+      <p>Agentic AI is doing more to DTC than automating workflows. It&#39;s changing who the customer is, how acquisition works, what brand loyalty means, and which business models survive. Most operators aren&#39;t ready for it. Most AI builders don&#39;t understand the commerce layer. I sit in the gap between them.</p>
+      <p>Right now: building AI systems and figuring out what to build next in this space. Writing about the shifts most DTC operators are still catching up to.</p>
+      <p>If you&#39;re a DTC founder or operator trying to understand what agentic AI actually means for your business &mdash; <a href="https://www.linkedin.com/in/antonyevans/">I&#39;d like to connect</a>.</p>
+      <p class="credentials">Cambridge Mathematics &nbsp;|&nbsp; INSEAD MBA &nbsp;|&nbsp; YC Alum</p>
+      <p>Subscribe via <a href="/rss.xml">RSS</a> or browse all posts on the <a href="/blog/">writing page</a>.</p>
     </article>
   </main>
   <SiteFooter />
@@ -21,4 +25,5 @@ import SiteFooter from '../components/SiteFooter.astro';
   .about { padding: 2rem 0; }
   article { max-width: 48rem; margin: 0 auto; padding: 1.5rem; }
   h1 { margin-top: 0; }
+  .credentials { color: var(--muted); font-size: 0.9rem; }
 </style>
