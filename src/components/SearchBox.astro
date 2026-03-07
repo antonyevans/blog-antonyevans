@@ -13,13 +13,12 @@ const { inputId = 'search-input' } = Astro.props;
 </section>
 
 <script>
-  const root = document.currentScript?.previousElementSibling;
-  if (!root) {
-    throw new Error('Search box root not found.');
-  }
-
-  const input = root.querySelector('input');
+  const input = document.querySelector<HTMLInputElement>('.search-box input[type="search"]');
   const results = document.getElementById('search-results');
+
+  if (!input || !results) {
+    console.warn('Search UI elements not found on page.');
+  }
 
   async function loadIndex() {
     const response = await fetch('/search-index.json');
