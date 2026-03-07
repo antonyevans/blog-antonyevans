@@ -47,13 +47,14 @@ const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 
 <style is:global>
   :root {
-    --bg: #f7f5f2;
-    --paper: #fffdf9;
-    --text: #22201d;
-    --muted: #6b6358;
-    --line: #d8d0c6;
-    --accent: #8c4f2e;
-    --accent-soft: #f0e3d5;
+    --bg: #f8f5f0;
+    --paper: #fdfaf6;
+    --primary: #3d4e81;
+    --accent: #f2a65a;
+    --text: #707070;
+    --muted: #707070;
+    --line: #d8d2c8;
+    --accent-soft: #f8e2c8;
     --max-width: 72rem;
   }
 
@@ -63,20 +64,19 @@ const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
   body {
     font-family: 'Manrope', 'Segoe UI', sans-serif;
     color: var(--text);
-    background:
-      radial-gradient(circle at 15% 0%, #f4ebe0 0%, transparent 32%),
-      radial-gradient(circle at 80% 0%, #e9efe6 0%, transparent 28%),
-      var(--bg);
+    background: var(--bg);
     line-height: 1.6;
   }
 
   h1, h2, h3 {
     font-family: 'Fraunces', Georgia, serif;
+    color: var(--primary);
     letter-spacing: 0.01em;
     line-height: 1.2;
   }
 
-  a { color: var(--accent); }
+  a { color: var(--primary); }
+  a:hover { color: var(--accent); }
 
   .container {
     width: min(100% - 2rem, var(--max-width));
@@ -96,6 +96,7 @@ const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     padding: 0.2rem 0.7rem;
     font-size: 0.82rem;
     text-decoration: none;
-    color: var(--muted);
+    color: var(--primary);
+    background: color-mix(in oklab, var(--bg) 90%, white 10%);
   }
 </style>
