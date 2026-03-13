@@ -5,6 +5,7 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
 import PostCard from '../../../../components/PostCard.astro';
 import Pagination from '../../../../components/Pagination.astro';
 import { getPublishedPosts, paginateArray, pageNumbers, slugify } from '../../../../lib/content';
+import { SITE_NAME } from '../../../../lib/site';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -29,7 +30,7 @@ const taggedPosts = allPosts.filter((post) => post.data.tags.some((item) => slug
 const { items, totalPages } = paginateArray(taggedPosts, currentPage);
 ---
 
-<Layout title={`#${tag} posts | Anton Yevans`} description={`Posts tagged ${tag}.`} canonical={`/blog/tag/${tag}/${currentPage}/`}>
+<Layout title={`#${tag} posts | ${SITE_NAME}`} description={`Posts tagged ${tag}.`} canonical={`/blog/tag/${tag}/${currentPage}/`}>
   <SiteHeader />
   <main class="container listing">
     <h1>Tag: #{tag}</h1>

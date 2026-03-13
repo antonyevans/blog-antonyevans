@@ -3,9 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SearchBox from '../components/SearchBox.astro';
+import { SITE_NAME } from '../lib/site';
 ---
 
-<Layout title="Search | Anton Yevans" description="Search blog posts." canonical="/search/">
+<Layout title={`Search | ${SITE_NAME}`} description="Search blog posts." canonical="/search/">
   <SiteHeader />
   <main class="container search-page">
     <h1>Search</h1>

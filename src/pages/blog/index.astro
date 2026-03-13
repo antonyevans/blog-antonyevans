@@ -6,12 +6,13 @@ import PostCard from '../../components/PostCard.astro';
 import Pagination from '../../components/Pagination.astro';
 import SearchBox from '../../components/SearchBox.astro';
 import { getPublishedPosts, paginateArray } from '../../lib/content';
+import { SITE_NAME } from '../../lib/site';
 
 const allPosts = await getPublishedPosts();
 const { items, totalPages } = paginateArray(allPosts, 1);
 ---
 
-<Layout title="Blog | Anton Yevans" description="All blog posts by Anton Yevans." canonical="/blog/">
+<Layout title={`Blog | ${SITE_NAME}`} description="All blog posts by Antony Evans." canonical="/blog/">
   <SiteHeader />
   <main class="container blog-index">
     <section class="surface intro">

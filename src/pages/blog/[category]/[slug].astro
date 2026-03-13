@@ -1,5 +1,5 @@
 ---
-import { getPublishedPosts, getPostUrl } from '../../../lib/content';
+import { getPublishedPosts, getPostUrl, getRelatedPosts } from '../../../lib/content';
 import PostLayout from '../../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
@@ -11,17 +11,21 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const allPosts = await getPublishedPosts();
+const relatedPosts = getRelatedPosts(post, allPosts);
 const { Content } = await post.render();
 ---
 
 <PostLayout
+  post={post}
   title={post.data.title}
   description={post.data.description}
   pubDate={post.data.pubDate}
   updatedDate={post.data.updatedDate}
   category={post.data.category}
   tags={post.data.tags}
-  canonical={getPostUrl(post)}>
+  canonical={getPostUrl(post)}
+  relatedPosts={relatedPosts}>
   {post.data.heroImage && (
     <figure>
       <img src={post.data.heroImage} alt={post.data.heroImageAlt || ''} />

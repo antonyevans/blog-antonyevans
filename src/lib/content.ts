@@ -17,8 +17,29 @@ export function slugify(value: string): string {
 }
 
 export async function getPublishedPosts(): Promise<BlogPost[]> {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await getCollection('blog', ({ data }) => !data.draft && !data.private);
   return posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+}
+
+export function getPostLastmod(post: BlogPost): Date {
+  return post.data.updatedDate || post.data.pubDate;
+}
+
+export function getRelatedPosts(post: BlogPost, posts: BlogPost[], limit = 3): BlogPost[] {
+  return posts
+    .filter((candidate) => candidate.id !== post.id)
+    .map((candidate) => {
+      const sharedTags = candidate.data.tags.filter((tag) => post.data.tags.some((item) => slugify(item) === slugify(tag))).length;
+      const sameCategory = candidate.data.category === post.data.category ? 1 : 0;
+
+      return {
+        post: candidate,
+        score: sharedTags * 10 + sameCategory * 3 + candidate.data.pubDate.getTime() / 1_000_000_000_000,
+      };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ post: relatedPost }) => relatedPost);
 }
 
 export async function getPostsByCategory(category: string): Promise<BlogPost[]> {

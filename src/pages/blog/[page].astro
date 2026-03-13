@@ -5,6 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import PostCard from '../../components/PostCard.astro';
 import Pagination from '../../components/Pagination.astro';
 import { getPublishedPosts, pageNumbers, paginateArray } from '../../lib/content';
+import { SITE_NAME } from '../../lib/site';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -19,7 +20,7 @@ const currentPage = Number(Astro.params.page ?? '1');
 const { items, totalPages } = paginateArray(allPosts, currentPage);
 ---
 
-<Layout title={`Blog page ${currentPage} | Anton Yevans`} description="Paginated blog archive." canonical={`/blog/${currentPage}/`}>
+<Layout title={`Blog page ${currentPage} | ${SITE_NAME}`} description="Paginated blog archive." canonical={`/blog/${currentPage}/`}>
   <SiteHeader />
   <main class="container listing">
     <h1>Blog archive</h1>

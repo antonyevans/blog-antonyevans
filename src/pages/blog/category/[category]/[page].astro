@@ -5,6 +5,7 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
 import PostCard from '../../../../components/PostCard.astro';
 import Pagination from '../../../../components/Pagination.astro';
 import { getPublishedPosts, paginateArray, pageNumbers } from '../../../../lib/content';
+import { SITE_NAME } from '../../../../lib/site';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -29,7 +30,7 @@ const categoryPosts = allPosts.filter((post) => post.data.category === category)
 const { items, totalPages } = paginateArray(categoryPosts, currentPage);
 ---
 
-<Layout title={`${category} posts | Anton Yevans`} description={`Posts in ${category}.`} canonical={`/blog/category/${category}/${currentPage}/`}>
+<Layout title={`${category} posts | ${SITE_NAME}`} description={`Posts in ${category}.`} canonical={`/blog/category/${category}/${currentPage}/`}>
   <SiteHeader />
   <main class="container listing">
     <h1>Category: {category}</h1>

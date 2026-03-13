@@ -2,9 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { SITE_NAME } from '../lib/site';
 ---
 
-<Layout title="About | Antony Evans" description="DTC operator turned AI builder. 7 years COO at Wild Earth. YC, INSEAD, Cambridge.">
+<Layout title={`About | ${SITE_NAME}`} description="DTC operator turned AI builder. 7 years COO at Wild Earth. YC, INSEAD, Cambridge." canonical="/about/">
   <SiteHeader />
   <main class="container about">
     <article class="surface">

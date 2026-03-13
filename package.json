@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:discovery": "node scripts/validate-discovery.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "deploy:pages": "wrangler pages deploy dist --project-name blog-antonyevans"

@@ -11,6 +11,7 @@ const blog = defineCollection({
     category: z.enum(BLOG_CATEGORIES),
     tags: z.array(z.string().min(1)).min(1),
     draft: z.boolean().default(false),
+    private: z.boolean().default(false),
     heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),
   }),

@@ -1,18 +1,42 @@
 ---
+import {
+  BING_SITE_VERIFICATION,
+  GOOGLE_SITE_VERIFICATION,
+  SITE_NAME,
+  SITE_TWITTER_HANDLE,
+  getCanonicalPath,
+  getDefaultSocialImage,
+  getRobotsDirectives,
+  toAbsoluteUrl,
+} from '../lib/site';
+
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  robots?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  schema?: Record<string, unknown> | null;
 }
 
 const {
-  title = 'Antony Evans',
+  title = SITE_NAME,
   description = 'DTC operator turned AI builder. Writing on agentic commerce and the future of DTC.',
   canonical,
+  robots = getRobotsDirectives(true),
+  ogType = 'website',
+  ogImage = getDefaultSocialImage(),
+  publishedTime,
+  modifiedTime,
+  schema = null,
 } = Astro.props;
 
-const canonicalUrl = canonical ? new URL(canonical, Astro.site) : undefined;
+const canonicalUrl = canonical ? toAbsoluteUrl(getCanonicalPath(canonical)) : undefined;
 const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const twitterCard = ogImage ? 'summary_large_image' : 'summary';
 ---
 
 <!doctype html>
@@ -28,11 +52,26 @@ const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl.toString()} />}
+    <meta name="robots" content={robots} />
+    <meta name="googlebot" content={robots} />
+    <meta name="bingbot" content={robots} />
+    {GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />}
+    {BING_SITE_VERIFICATION && <meta name="msvalidate.01" content={BING_SITE_VERIFICATION} />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    {canonicalUrl && <meta property="og:url" content={canonicalUrl.toString()} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:image" content={ogImage} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {SITE_TWITTER_HANDLE && <meta name="twitter:site" content={SITE_TWITTER_HANDLE} />}
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>
   <body>
     <slot />

@@ -15,6 +15,8 @@ Minimal editorial blog built with Astro and deployed to Cloudflare Pages.
 - `npm install` install dependencies
 - `npm run dev` start local development server
 - `npm run build` build static site to `dist/`
+- `npm run check:discovery` validate generated crawl/indexing assets in `dist/`
+- `npm run indexnow -- <url ...>` submit updated URLs to IndexNow
 - `npm run preview` preview build output locally
 - `npm run deploy:pages` deploy `dist/` to Cloudflare Pages
 
@@ -58,7 +60,12 @@ See `src/content/blog/media-rich-post-example.mdx` for usage.
 - Search index generated at `/search-index.json`
 - Search UI at `/search/`
 - RSS feed at `/rss.xml`
-- Sitemap generated automatically by `@astrojs/sitemap`
+- Sitemap generated at `/sitemap.xml`
+- Robots rules generated at `/robots.txt`
+- Optional `llms.txt` generated at `/llms.txt`
+- Page metadata includes canonical tags, Open Graph/Twitter cards, and JSON-LD blog posting schema
+- Google/Bing verification meta tags and verification files can be enabled with env vars
+- Optional IndexNow support is available via `npm run indexnow`
 
 ## Cloudflare Setup
 
@@ -87,3 +94,5 @@ After these secrets are configured, `git push` to `main` will automatically publ
 Optional analytics token:
 
 - Set `PUBLIC_CF_ANALYTICS_TOKEN` in your environment (see `.env.example`).
+
+Discovery and launch operations are documented in `DISCOVERY_SETUP.md`.
