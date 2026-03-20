@@ -1,14 +1,12 @@
 ---
 title: "Human UX vs Agent UX"
-description: "Everything you were taught about UX optimisation assumes the buyer is human."
+description: "Urgency works on humans. Scarcity works on humans. Beautiful photography works on humans. You've spent years getting these things right \u2014 the above-the-fold her"
 pubDate: "2026-03-20"
-updatedDate: "2026-03-17"
+updatedDate: "2026-03-19"
 category: engineering
 tags: ["engineering", "system-lens"]
 draft: false
 ---
-
-Everything you were taught about UX optimisation assumes the buyer is human.
 
 Urgency works on humans. Scarcity works on humans. Beautiful photography works on humans. You've spent years getting these things right — the above-the-fold hero image, the countdown timer, the social proof bar. And it works. Conversion rates have been the north star.
 
