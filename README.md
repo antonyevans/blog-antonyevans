@@ -101,8 +101,9 @@ Required GitHub repository secrets:
 
 After these secrets are configured, `git push` to `main` will automatically publish to the live site.
 
-Optional analytics token:
+Optional analytics:
 
 - Set `PUBLIC_CF_ANALYTICS_TOKEN` in your environment (see `.env.example`).
+- Set `PUBLIC_GA_MEASUREMENT_ID` to your GA4 measurement ID, for example `G-XXXXXXXXXX`.
 
 Discovery and launch operations are documented in `DISCOVERY_SETUP.md`.

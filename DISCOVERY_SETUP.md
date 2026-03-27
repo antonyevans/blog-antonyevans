@@ -36,6 +36,7 @@ PUBLIC_SITE_DEFAULT_SOCIAL_IMAGE=/favicon.svg
 PUBLIC_TWITTER_HANDLE=
 PUBLIC_GOOGLE_SITE_VERIFICATION=
 PUBLIC_BING_SITE_VERIFICATION=
+PUBLIC_GA_MEASUREMENT_ID=
 PUBLIC_SITE_INDEXING=true
 PUBLIC_ROBOTS_BLOCK_BOTS=
 PUBLIC_ROBOTS_EXTRA_DISALLOW=
@@ -49,6 +50,7 @@ Notes:
 - Set `PUBLIC_SITE_INDEXING=false` only for intentionally non-indexable environments.
 - Setting `PUBLIC_GOOGLE_SITE_VERIFICATION` generates both the verification meta tag and the `google<token>.html` verification file.
 - Setting `PUBLIC_BING_SITE_VERIFICATION` generates both the Bing meta tag and `BingSiteAuth.xml`.
+- Setting `PUBLIC_GA_MEASUREMENT_ID` enables Google Analytics 4 in production builds.
 - Setting `INDEXNOW_KEY` generates `/<key>.txt` and enables IndexNow submissions.
 
 ## Operating It

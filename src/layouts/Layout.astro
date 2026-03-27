@@ -36,6 +36,7 @@ const {
 
 const canonicalUrl = canonical ? toAbsoluteUrl(getCanonicalPath(canonical)) : undefined;
 const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const twitterCard = ogImage ? 'summary_large_image' : 'summary';
 ---
 
@@ -71,6 +72,19 @@ const twitterCard = ogImage ? 'summary_large_image' : 'summary';
     <meta name="twitter:image" content={ogImage} />
     {SITE_TWITTER_HANDLE && <meta name="twitter:site" content={SITE_TWITTER_HANDLE} />}
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    {import.meta.env.PROD && gaMeasurementId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+        <script
+          is:inline
+          define:vars={{ gaMeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', gaMeasurementId);
+        </script>
+      </>
+    )}
   </head>
   <body>
     <slot />
