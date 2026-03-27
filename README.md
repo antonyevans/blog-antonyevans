@@ -31,13 +31,14 @@ Required frontmatter fields:
 - `title`
 - `description`
 - `pubDate`
-- `category` (one of: `engineering`, `product`, `writing`, `notes`)
+- `category` (one of: `engineering`, `product`, `writing`, `notes`, `operator-insights`)
 - `tags` (non-empty array)
-- `draft` (boolean)
 
 Optional fields:
 
 - `updatedDate`
+- `draft` (defaults to `false`)
+- `private` (defaults to `false`)
 - `heroImage`
 - `heroImageAlt`
 
@@ -53,7 +54,16 @@ Import reusable components:
 - `VideoEmbed` from `src/components/content/VideoEmbed.astro`
 - `ImageCarousel` from `src/components/content/ImageCarousel.astro`
 
-See `src/content/blog/media-rich-post-example.mdx` for usage.
+Concrete example:
+
+- `src/content/blog/media-rich-post-example.mdx`
+
+That example shows:
+
+- `heroImage` + `heroImageAlt` in frontmatter
+- `Figure` for a captioned inline image
+- `ImageCarousel` for multiple images
+- `VideoEmbed` for iframe-based embeds such as YouTube or Vimeo
 
 ## Search, Feeds, SEO
 

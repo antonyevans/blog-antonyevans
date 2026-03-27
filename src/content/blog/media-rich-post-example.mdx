@@ -1,0 +1,52 @@
+---
+title: "Media-Rich Post Example"
+description: "Reference post showing how to use hero images, captioned images, carousels, and video embeds in MDX."
+pubDate: "2026-03-27"
+category: notes
+tags: ["example", "mdx", "media"]
+draft: true
+heroImage: "/images/c044-ai-operating-system.png"
+heroImageAlt: "A diagram titled Designing My AI Operating System."
+---
+
+import Figure from '../../components/content/Figure.astro';
+import ImageCarousel from '../../components/content/ImageCarousel.astro';
+import VideoEmbed from '../../components/content/VideoEmbed.astro';
+
+This draft post is the canonical example for adding richer media to a blog entry.
+
+## Hero image
+
+The `heroImage` and `heroImageAlt` frontmatter fields place a full-width image above the article body and also provide the social sharing image for the post.
+
+## Captioned image
+
+<Figure
+  src="/images/posts/c029-screenshot-2026-03-06-230052.png"
+  alt="Screenshot of a post image stored under public/images/posts."
+  caption="Use the Figure component when you want an inline image with consistent styling and an optional caption."
+/>
+
+## Image carousel
+
+<ImageCarousel
+  slides={[
+    {
+      src: '/images/c044-ai-operating-system.png',
+      alt: 'Diagram titled Designing My AI Operating System.',
+    },
+    {
+      src: '/images/posts/c029-screenshot-2026-03-06-230052.png',
+      alt: 'Screenshot example stored in the post images folder.',
+    },
+  ]}
+/>
+
+## Video embed
+
+<VideoEmbed
+  title="Example YouTube embed"
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+/>
+
+Use `.md` for standard articles. Switch to `.mdx` when you need Astro components like these inside the post body.
