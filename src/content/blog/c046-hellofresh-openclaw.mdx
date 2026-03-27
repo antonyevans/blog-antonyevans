@@ -1,0 +1,49 @@
+---
+title: "I Replaced HelloFresh with an OpenClaw Skill"
+description: "OpenClaw is the fastest-growing open-source AI agent of 2026, with over 100,000 GitHub stars and a skills ecosystem anyone can extend. I built a skill that repl"
+pubDate: "2026-03-27"
+category: engineering
+tags: ["engineering", "system-lens"]
+draft: false
+---
+
+import VideoEmbed from '../../components/content/VideoEmbed.astro';
+
+OpenClaw is the fastest-growing open-source AI agent of 2026, with over 100,000 GitHub stars and a skills ecosystem anyone can extend. I built a skill that replaced my HelloFresh subscription, and what it took to build it says something about where a lot of billion-dollar convenience businesses are headed.
+
+OpenClaw runs on your own hardware or a cloud server and connects to the apps you already use: WhatsApp, Slack, email, calendars. You give it a task via chat; it figures out the steps and executes them using skills, which are modular plugins that extend what it can do. Think of it as a developer's version of Siri, except it actually does things. The public skills registry, ClawHub, now has over 13,000 community-built plugins. Some handle browser automation. Some connect to APIs. Some, like the grocery skill I built, chain a few of these together to automate a weekly workflow.
+
+<VideoEmbed
+  title="Replacing HelloFresh with an OpenClaw skill"
+  src="https://www.youtube.com/embed/xnscclzyC3E"
+/>
+
+**The workflow**
+
+The skill does three things.
+
+First, it generates a list of recipes. Not from a database. It uses an LLM to come up with a week's worth of meals based on whatever parameters I've set: family preferences, how much cooking time I want, ingredients someone in the house won't touch. I review the list and pick the ones I want to make. I can edit anything: swap a recipe, change a quantity, remove an ingredient.
+
+Second, it takes that list and populates my Wegmans online cart with the right ingredients in the right quantities. It works with any grocery store that has an online shopping cart. The skill stops before checkout. That step stays mine.
+
+Third, it uploads each recipe to a Notion table. When I'm at the stove, I pull up the table on my phone and cook from there. No hunting through a browser tab I opened three days ago.
+
+The whole workflow runs in a few minutes. HelloFresh used to take an hour a week between browsing the site, choosing meals, waiting on delivery timing, and unpacking the box. The food costs less going direct to Wegmans too. And I can finally drop the ingredients nobody in our house actually eats.
+
+**Why I left checkout to myself**
+
+I could have automated the full loop. It would take one more function call.
+
+I chose not to because final spend confirmation is one of those controls I want to keep. The confirmation step is also a natural moment to catch anything I missed: an upcoming dinner party, something already in the fridge. The skill removes all the thinking. The checkout keeps me in the loop for the one decision that has real-world consequence.
+
+This is worth keeping in mind when you're building anything agentic for yourself. Automate the thinking. Keep the confirmation points that matter.
+
+**The bigger pattern**
+
+HelloFresh's business model is a bundle: recipe curation, ingredient sourcing, and weekly decision removal. The food is almost incidental. What they charge for is the coordination and the friction they absorb on your behalf.
+
+The bundle is breakable now. The curation is an LLM call. The cart is browser automation against whatever grocery store you use. The recipe storage is a Notion table. HelloFresh was wrapping all three together and charging for the convenience of not having to connect them yourself.
+
+Grocery is the obvious first target because the weekly shop is so predictable and repeatable. The same logic applies to a lot of subscription businesses that are really coordination businesses in disguise: meal planning services, personal styling boxes, curated supplements. Each is a bundle of curation plus coordination plus friction removal. Agents are good at all three.
+
+The skill is on GitHub if you want to build your own version: [antonyevans/weekly-food-plan](https://github.com/antonyevans/weekly-food-plan)
