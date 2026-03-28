@@ -2,13 +2,10 @@
 title: "The Brand That Wants to Be Found by AI \u2014 But Not Bought by It"
 description: "OpenAI launched Instant Checkout in September 2025. By March 2026, it was dead. Five months, roughly 30 merchants out of millions adopted it, and they've since "
 pubDate: "2026-03-28"
-updatedDate: "2026-03-27"
 category: notes
 tags: ["notes"]
 draft: false
 ---
-
-OpenAI launched Instant Checkout in September 2025. By March 2026, it was dead. Five months, roughly 30 merchants out of millions adopted it, and they've since pivoted back to routing users to merchant sites. Most coverage focused on what went wrong technically: product data too messy to standardize at scale, no sales tax infrastructure, merchant onboarding described as "arduous." Those things are all true. But there's a more fundamental reason the post-mortems have mostly missed.
 
 Merchants block AI agents from completing purchases because checkout is where they make money, and they built their businesses around it.
 
