@@ -1,6 +1,7 @@
 ---
 title: "My AI Stack \u2014 Running Work Through a Terminal"
 description: "My goal: run my entire work life through a terminal. I'm about 60% there. Here's what the setup looks like."
+dek: "My goal: run my entire work life through a terminal. I'm about 60% there. Here's what the setup looks like."
 pubDate: "2026-03-05"
 updatedDate: "2026-03-02"
 category: engineering

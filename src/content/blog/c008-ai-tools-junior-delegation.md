@@ -1,6 +1,7 @@
 ---
 title: "C008 Ai Tools Junior Delegation"
 description: "How are you supposed to learn AI when you barely have time to do your job?"
+dek: "How are you supposed to learn AI when you barely have time to do your job?"
 pubDate: "2026-02-06"
 category: engineering
 tags: ["engineering", "ai-tech-trends"]

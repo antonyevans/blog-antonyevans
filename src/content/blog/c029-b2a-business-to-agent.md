@@ -1,6 +1,7 @@
 ---
 title: "B2A: Business to Agent \u2014 Who Is the Customer?"
 description: "For 30 years, commerce ran on two categories. Both assumed the buyer was a human. That assumption just broke."
+dek: "For 30 years, commerce ran on two categories. Both assumed the buyer was a human. That assumption just broke."
 pubDate: "2026-03-09"
 updatedDate: "2026-03-06"
 category: engineering

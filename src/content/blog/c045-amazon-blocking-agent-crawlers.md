@@ -1,6 +1,7 @@
 ---
 title: "Why Amazon Blocking Agent Crawlers Is the Most Telling Signal in Agentic Commerce"
 description: "Amazon blocks agent crawlers. That's not a technical decision. It's a strategic one."
+dek: "Amazon blocks agent crawlers. That's not a technical decision. It's a strategic one."
 pubDate: "2026-03-19"
 updatedDate: "2026-03-17"
 category: engineering

@@ -1,6 +1,7 @@
 ---
 title: "Human UX vs Agent UX"
 description: "Urgency works on humans. Scarcity works on humans. Beautiful photography works on humans. You've spent years getting these things right \u2014 the above-the-fold her"
+dek: "Urgency works on humans. Scarcity works on humans. Beautiful photography works on humans. You've spent years getting these things right \u2014 the above-the-fold her"
 pubDate: "2026-03-20"
 updatedDate: "2026-03-19"
 category: engineering

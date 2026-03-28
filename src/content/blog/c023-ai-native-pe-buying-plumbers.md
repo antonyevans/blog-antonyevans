@@ -1,6 +1,7 @@
 ---
 title: "AI-Native PE Is Buying Plumbers. Here's What That Tells Me."
 description: "Private equity figured out where durable value lives before most founders did. Not software. Boring businesses with an AI layer on top."
+dek: "Private equity figured out where durable value lives before most founders did. Not software. Boring businesses with an AI layer on top."
 pubDate: "2026-03-02"
 category: product
 tags: ["product", "conscious-building"]

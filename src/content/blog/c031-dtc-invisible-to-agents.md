@@ -1,6 +1,7 @@
 ---
 title: "Why Most DTC Brands Are Invisible to Agents"
 description: "91% of online stores are invisible to AI agents. The gap isn't traffic and it isn't brand. It's that the data isn't structured correctly."
+dek: "91% of online stores are invisible to AI agents. The gap isn't traffic and it isn't brand. It's that the data isn't structured correctly."
 pubDate: "2026-03-11"
 category: engineering
 tags: ["engineering", "ai-tech"]

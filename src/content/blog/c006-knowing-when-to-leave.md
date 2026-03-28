@@ -1,6 +1,7 @@
 ---
 title: "Knowing when to leave a role you built"
 description: "I spent 7 years building a company. Then I walked away."
+dek: "I spent 7 years building a company. Then I walked away."
 pubDate: "2026-02-03"
 category: notes
 tags: ["notes", "operator"]

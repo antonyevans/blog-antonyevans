@@ -1,6 +1,7 @@
 ---
 title: "Why I'm exploring franchises after 7 years as a startup COO"
 description: "What if the best path to ownership isn't another startup?"
+dek: "What if the best path to ownership isn't another startup?"
 pubDate: "2026-01-23"
 category: operator-insights
 tags: ["operator-insights"]

@@ -1,6 +1,7 @@
 ---
 title: "What an Agent \\\"Cares About\\\" When Buying"
 description: "The next wave of buyers won't have feelings about your brand. They'll have decision criteria. AI agents are already making purchasing decisions in software, and"
+dek: "The next wave of buyers won't have feelings about your brand. They'll have decision criteria. AI agents are already making purchasing decisions in software, and"
 pubDate: "2026-03-13"
 category: engineering
 tags: ["engineering", "system-lens"]

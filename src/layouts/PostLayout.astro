@@ -10,6 +10,7 @@ interface Props {
   post: CollectionEntry<'blog'>;
   title: string;
   description: string;
+  dek?: string;
   pubDate: Date;
   updatedDate?: Date;
   category: string;
@@ -18,7 +19,7 @@ interface Props {
   relatedPosts?: CollectionEntry<'blog'>[];
 }
 
-const { post, title, description, pubDate, updatedDate, category, tags, canonical, relatedPosts = [] } = Astro.props;
+const { post, title, description, dek, pubDate, updatedDate, category, tags, canonical, relatedPosts = [] } = Astro.props;
 const image = getSocialImageForPost(post);
 const canonicalUrl = toAbsoluteUrl(canonical);
 const schema = {
@@ -60,7 +61,7 @@ const schema = {
           {updatedDate && <span>Updated {updatedDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}</span>}
         </p>
         <h1>{title}</h1>
-        <p class="dek">{description}</p>
+        {dek && <p class="dek">{dek}</p>}
       </header>
       <slot />
       <footer class="tags">

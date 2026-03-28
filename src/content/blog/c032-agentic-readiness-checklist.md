@@ -1,6 +1,7 @@
 ---
 title: "Agentic Readiness Checklist"
 description: "When an AI agent visits your store, it doesn't see your homepage or your brand story. It reads product identifiers, schema markup, protocol manifests, and check"
+dek: "When an AI agent visits your store, it doesn't see your homepage or your brand story. It reads product identifiers, schema markup, protocol manifests, and check"
 pubDate: "2026-03-17"
 category: engineering
 tags: ["engineering", "system-lens"]

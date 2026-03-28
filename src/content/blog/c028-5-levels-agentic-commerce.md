@@ -1,6 +1,7 @@
 ---
 title: "The 5 Levels of Agentic Commerce"
 description: "ChatGPT Instant Checkout launched on February 16. Within days, 800 million users had a direct checkout path through an AI agent. Glossier, SKIMS, Vuori \u2014 alread"
+dek: "ChatGPT Instant Checkout launched on February 16. Within days, 800 million users had a direct checkout path through an AI agent. Glossier, SKIMS, Vuori \u2014 alread"
 pubDate: "2026-02-26"
 category: engineering
 tags: ["engineering", "system-lens"]

@@ -1,6 +1,7 @@
 ---
 title: "Both Right: The Dalio/Diamandis Tension"
 description: "I've started calling it the simultaneous truth."
+dek: "I've started calling it the simultaneous truth."
 pubDate: "2026-02-20"
 category: engineering
 tags: ["engineering", "system-lens"]

@@ -37,6 +37,7 @@ Required frontmatter fields:
 Optional fields:
 
 - `updatedDate`
+- `dek` (visible subtitle beneath the post title)
 - `draft` (defaults to `false`)
 - `private` (defaults to `false`)
 - `heroImage`
