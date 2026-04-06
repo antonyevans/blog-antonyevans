@@ -3,7 +3,6 @@ title: "Delegation vs Automation"
 description: "Unpopular opinion: building AI workflows that stop for human confirmation isn't careful design. It might just be discomfort dressed up as caution."
 dek: ""
 pubDate: "2026-04-06"
-updatedDate: "2026-03-31"
 category: engineering
 tags: ["engineering", "system-lens"]
 draft: false
