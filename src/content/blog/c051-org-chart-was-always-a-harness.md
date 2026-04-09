@@ -3,7 +3,6 @@ title: "The org chart was always a harness. Dorsey just built a better one."
 description: "Nobody designed the org chart as a management philosophy. It was infrastructure. The Romans invented nested hierarchy to solve a specific engineering problem: how do you coordinate 5,000 soldiers across a battlefield when the only way to route information is through humans? Their answer, 8 soldiers to a squad leader, squads to centuries, centuries to cohorts, was a system for getting reliable output from fallible components without any of the communication technology we take for granted. It worked. The model spread. We inherited it almost unchanged and built 170 years of management theory on top of it, as if the pyramid was the point rather than the workaround."
 dek: ""
 pubDate: "2026-04-09"
-updatedDate: "2026-03-31"
 category: ai-tech-operator
 tags: ["ai-tech-operator"]
 draft: false
@@ -25,7 +24,7 @@ When you interact with a language model directly, you're using something impress
 
 The argument for why comes from Andrej Karpathy's reliability math. Reaching 90% success on a single step with an AI model is relatively easy. But compound that across a multi-step workflow and the numbers get ugly fast.
 
-![Karpathy's reliability compounding](c051-images/c051-karpathy-reliability.png)
+![Karpathy's reliability compounding](/images/posts/c051-karpathy-reliability.png)
 
 A 10-step process where each step succeeds 90% of the time produces a 35% end-to-end success rate. Run that process 10 times a day and you get more than six failures. Every day. You cannot prompt your way past this. The model isn't going to get more reliable because you asked it to try harder.
 
@@ -33,7 +32,7 @@ A harness is the engineering response to this problem. It's the software layer t
 
 A harness has five components:
 
-![Harness architecture — five layers](c051-images/c051-harness-architecture.png)
+![Harness architecture — five layers](/images/posts/c051-harness-architecture.png)
 
 **Orchestration and planning**: a planner agent takes a high-level goal and decomposes it into phases. A state machine tracks where the workflow currently is. The harness knows what has been done and what comes next.
 
@@ -57,7 +56,7 @@ The essay he published with Sequoia's Roelof Botha explains what that means stru
 
 Block's replacement has four layers:
 
-![Block's four-layer architecture](c051-images/c051-block-four-layers.png)
+![Block's four-layer architecture](/images/posts/c051-block-four-layers.png)
 
 **Capabilities** are atomic financial primitives: payments, lending, card issuance, banking, BNPL, payroll. They have no UI of their own. They're not products. They're reliable, composable building blocks, things the system can call when it needs them.
 
@@ -69,7 +68,7 @@ Block's replacement has four layers:
 
 Three roles replace the management layers that hierarchy required:
 
-![Three roles vs traditional hierarchy](c051-images/c051-three-roles-vs-hierarchy.png)
+![Three roles vs traditional hierarchy](/images/posts/c051-three-roles-vs-hierarchy.png)
 
 **ICs** build and operate the four layers. The key change: the world model gives them the context that managers used to provide. In a traditional org, an IC needs to escalate to understand whether a decision fits broader company strategy, whether a pattern they're seeing is known elsewhere, whether their work conflicts with another team's. In Block's model, the world model holds that context. ICs can make independent decisions without seeking upward permission.
 
@@ -83,7 +82,7 @@ Three roles replace the management layers that hierarchy required:
 
 Put the two frameworks next to each other.
 
-![The same problem, solved twice](c051-images/c051-mapping-harness-block.png)
+![The same problem, solved twice](/images/posts/c051-mapping-harness-block.png)
 
 The structural match isn't superficial. The reasoning behind each element is the same in both frameworks.
 
@@ -115,7 +114,7 @@ Block's answer is the economic graph, both sides of millions of merchant and con
 
 His framing of what happens without it: "AI doesn't augment your company. It reveals what your company actually is." If you don't have proprietary understanding that deepens continuously, AI makes you leaner. It doesn't make you stronger. You get the cost optimization without the compounding advantage.
 
-![Where both frameworks converge](c051-images/c051-moat-comparison.png)
+![Where both frameworks converge](/images/posts/c051-moat-comparison.png)
 
 The question for any company thinking about AI adoption isn't which tools to use or which workflows to automate. It's what your company understands that nobody else can easily learn. If you have a clear answer, AI amplifies it. If you don't, that's probably the more urgent problem to solve.
 
