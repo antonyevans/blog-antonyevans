@@ -1,6 +1,6 @@
 ---
 title: "The org chart was always a harness. Dorsey just built a better one."
-description: "Nobody designed the org chart as a management philosophy. It was infrastructure. The Romans invented nested hierarchy to solve a specific engineering problem: how do you coordinate 5,000 soldiers across a battlefield when the only way to route information is through humans? Their answer, 8 soldiers to a squad leader, squads to centuries, centuries to cohorts, was a system for getting reliable output from fallible components without any of the communication technology we take for granted. It worked. The model spread. We inherited it almost unchanged and built 170 years of management theory on top of it, as if the pyramid was the point rather than the workaround."
+description: "Nobody designed the org chart as a management philosophy. It was infrastructure."
 dek: ""
 pubDate: "2026-04-09"
 category: ai-tech-operator
@@ -10,7 +10,11 @@ draft: false
 
 ---
 
-Nobody designed the org chart as a management philosophy. It was infrastructure. The Romans invented nested hierarchy to solve a specific engineering problem: how do you coordinate 5,000 soldiers across a battlefield when the only way to route information is through humans? Their answer, 8 soldiers to a squad leader, squads to centuries, centuries to cohorts, was a system for getting reliable output from fallible components without any of the communication technology we take for granted. It worked. The model spread. We inherited it almost unchanged and built 170 years of management theory on top of it, as if the pyramid was the point rather than the workaround.
+Nobody designed the org chart as a management philosophy. It was infrastructure.
+
+The Romans invented nested hierarchy to solve a specific engineering problem: how do you coordinate 5,000 soldiers across a battlefield when the only way to route information is through humans? Their answer, 8 soldiers to a squad leader, squads to centuries, centuries to cohorts, was a system for getting reliable output from fallible components without any of the communication technology we take for granted.
+
+It worked. The model spread. We inherited it almost unchanged and built 170 years of management theory on top of it, as if the pyramid was the point rather than the workaround.
 
 Jack Dorsey published an essay this week arguing that AI makes the whole structure obsolete. He's right, but not quite for the reasons the headlines suggest. The org chart isn't being replaced because managers are unnecessary or because AI is smarter than people. It's being replaced because AI engineering has produced a better answer to the same infrastructure problem hierarchy was built to solve.
 
@@ -84,29 +88,27 @@ Put the two frameworks next to each other.
 
 ![The same problem, solved twice](/images/posts/c051-mapping-harness-block.png)
 
-The structural match isn't superficial. The reasoning behind each element is the same in both frameworks.
+The reasoning behind each element is the same in both frameworks.
 
-Sub-agents in a harness are narrow and isolated because composable reliability requires each component to be independently reliable. Block's capabilities work the same way: they are atomic, have no UI, carry no state, and can be composed without their internals interfering with each other.
+Sub-agents in a harness are narrow and isolated because composable reliability requires each component to be independently reliable. Block's capabilities work the same way: atomic, no UI, no state, composable without their internals interfering with each other.
 
-The context and memory layer in a harness is where the system's accumulated knowledge lives, the RAG playbook, the CHANGELOG, the precedents and patterns that let the agent make good decisions without starting from scratch. Block's world model is the same layer, built from the most honest signal available: real financial transactions from both sides of the market.
+The memory layer in a harness is where the system's accumulated knowledge lives: the RAG playbook, the CHANGELOG, the precedents that let the agent make good decisions without starting from scratch. Block built the same layer from the most honest signal available. Real financial transactions from both sides of the market.
 
-The orchestrator in a harness composes sub-agents based on what the memory knows, with an adversarial evaluator validating the output. Block's intelligence layer composes capabilities based on what the world models know, with the system proactively surfacing actions the merchant hasn't asked for yet.
+Block's intelligence layer composes capabilities based on what the world models know, proactively surfacing actions the merchant hasn't thought to ask for yet. The harness orchestrator does the same thing from the software side: composes sub-agents based on memory signals, with an adversarial evaluator checking every step.
 
-The programmatic output layer in a harness is thin and templated because the value isn't in how the final output is formatted. It's in the reasoning and composition that produced it. Block's interfaces are the same: thin surfaces on top of models that do the real work.
+Both architectures have a deliberately thin output layer. In a harness, programmatic templates handle final deliverables because the value lives in the reasoning that produced the output, not the formatting. Block's interfaces, Square, Cash App, Afterpay, are the same: surfaces on top of models that do the real work. Both also have defined points where human judgment is required before anything consequential proceeds. DRIs in the org. Human-in-the-loop gates in the harness. Named people with scoped authority, rather than diffuse approval chains where accountability gets lost.
 
-Human-in-the-loop gates in a harness are defined pause points where a human's judgment is required before a consequential action proceeds. DRIs are the org-level equivalent, named humans with scoped authority who own specific decisions, rather than diffuse approval chains where accountability gets lost.
-
-Harness engineers are emerging as a distinct discipline: people who understand both software engineering and AI-specific context management, adversarial evaluation design, and orchestration patterns. Player-Coaches are Dorsey's version of the same role, people who build the system and understand how to calibrate it, rather than people whose job is to route information through it.
+Harness engineers are emerging as a distinct discipline: people who understand software engineering, AI-specific context management, adversarial evaluation design, and orchestration patterns. Player-Coaches are Dorsey's version. They build the system and calibrate it. They don't route information through it.
 
 The phrase from the Dorsey essay that lands differently once you see the mapping: "The intelligence lives in the system. The people are on the edge. The edge is where the action is."
 
-That's not a philosophy statement. It's an architecture decision. In a well-designed harness, the model and its supporting structure handle the work that can be systematised. The humans are at the boundary — doing the things the system genuinely can't: sensing novel context, making ethical judgments, building trust with other humans, noticing what the model's world model doesn't yet capture. You don't put humans in the middle to route information. You put them at the edge where their judgment is irreplaceable.
+That's not a philosophy statement. It's an architecture decision. In a well-designed harness, the model and its supporting structure handle the work that can be systematised. The humans are at the boundary, doing the things the system genuinely can't: sensing novel context, making ethical judgments, building trust with other humans. Noticing what the world model doesn't yet know. You don't put humans in the middle to route information. You put them at the edge where their judgment is irreplaceable.
 
 ---
 
 ### Part 4: Where both frameworks converge — the moat
 
-In harness architecture, the competitive advantage isn't the model. Models are becoming commodity. The performance gap between frontier systems has narrowed significantly. What determines whether a harness succeeds isn't which model it calls. It's the quality of the memory and validation layers around it. The moat is what the system knows and can reliably act on, not the intelligence it rents from an API.
+In harness architecture, the competitive advantage isn't the model. Models are becoming commodity. The performance gap between frontier systems has narrowed to the point where model choice rarely determines outcomes. What determines whether a harness succeeds is the quality of the memory and validation layers, not which model it calls. That's the moat: what the system knows and can reliably act on. Not the intelligence it rents from an API.
 
 Dorsey makes the same argument about organisations. The essay's central question: "What does your company understand that is genuinely hard to understand, and is that understanding getting deeper every day?"
 
@@ -122,7 +124,7 @@ The question for any company thinking about AI adoption isn't which tools to use
 
 ### Why this matters
 
-Traditional hierarchy was an engineering solution to a coordination problem. It was the best available answer for 170 years. It isn't being replaced because it was bad management. It's being replaced because a better engineering solution now exists for the routing problem it was built to solve.
+Traditional hierarchy was an engineering solution to a coordination problem. The best available answer for 170 years. It isn't being replaced because it was bad management. It's being replaced because a better engineering solution now exists for the same routing problem it was built to solve.
 
 That changes what you look at when evaluating whether something is working. You don't ask "are our managers managing well?" You ask "where is the information getting stuck, and what's the correct structural fix?" You don't ask "should we cut headcount?" You ask "which layer of this system is introducing failure?"
 
