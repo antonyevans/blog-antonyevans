@@ -6,6 +6,11 @@ on:
       - main
   pull_request:
 
+concurrency:
+  # Prevent overlapping deploys from racing custom-domain promotion.
+  group: pages-deploy-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   deployments: write
