@@ -14,3 +14,5 @@ draft: true
 ---
 
 Duplicate this file, replace the frontmatter, and set `draft: false` when the project should appear on `/projects/`.
+
+Add any longer project notes below this line. The Markdown body appears on the project detail page.

@@ -1,11 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getProjectUrl } from '../lib/content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props;
+const projectUrl = getProjectUrl(project);
 ---
 
 <article class={`surface project-card${project.data.featured ? ' featured' : ''}`}>
@@ -17,9 +19,10 @@ const { project } = Astro.props;
       <span class="chip">{project.data.status}</span>
       <span>{project.data.category}</span>
     </p>
-    <h2>{project.data.title}</h2>
+    <h2><a href={projectUrl}>{project.data.title}</a></h2>
     <p>{project.data.description}</p>
     <div class="actions">
+      <a class="chip" href={projectUrl}>Details</a>
       <a class="chip" href={project.data.url} target="_blank" rel="noopener noreferrer">Visit project</a>
       {project.data.repoUrl && (
         <a class="chip" href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">Source</a>
@@ -65,6 +68,11 @@ const { project } = Astro.props;
   h2 {
     margin: 0;
     font-size: 1.4rem;
+  }
+
+  h2 a {
+    color: var(--primary);
+    text-decoration: none;
   }
 
   p {

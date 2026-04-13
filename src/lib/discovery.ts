@@ -4,6 +4,7 @@ import {
   getPublishedProjects,
   getPostUrl,
   getProjectLastmod,
+  getProjectUrl,
   getPostsByCategory,
   getPostsByTag,
   getTagMap,
@@ -74,6 +75,15 @@ export async function getPublicPages(): Promise<PublicPage[]> {
       path,
       absoluteUrl: toAbsoluteUrl(path),
       lastmod: postLastmod(post),
+    });
+  }
+
+  for (const project of projects) {
+    const path = getProjectUrl(project);
+    pages.push({
+      path,
+      absoluteUrl: toAbsoluteUrl(path),
+      lastmod: getProjectLastmod(project),
     });
   }
 

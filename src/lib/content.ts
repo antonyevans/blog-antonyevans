@@ -9,6 +9,10 @@ export function getPostUrl(post: BlogPost): string {
   return `/blog/${post.data.category}/${post.slug}/`;
 }
 
+export function getProjectUrl(project: Project): string {
+  return `/projects/${project.slug}/`;
+}
+
 export function slugify(value: string): string {
   return value
     .trim()

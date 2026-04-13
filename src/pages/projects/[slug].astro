@@ -1,0 +1,135 @@
+---
+import { getPublishedProjects, getProjectUrl } from '../../lib/content';
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { SITE_NAME, toAbsoluteUrl } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const projects = await getPublishedProjects();
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const canonical = getProjectUrl(project);
+const image = project.data.image ? toAbsoluteUrl(project.data.image) : undefined;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.data.title,
+  description: project.data.description,
+  url: project.data.url,
+  mainEntityOfPage: toAbsoluteUrl(canonical),
+  ...(image ? { image } : {}),
+};
+---
+
+<Layout
+  title={`${project.data.title} | Projects | ${SITE_NAME}`}
+  description={project.data.description}
+  canonical={canonical}
+  ogImage={image}
+  schema={schema}>
+  <SiteHeader />
+  <main class="container project-main">
+    <article class="surface project-detail">
+      <header>
+        <p class="meta">
+          <span class="chip">{project.data.status}</span>
+          <span>{project.data.category}</span>
+          {project.data.launchedDate && (
+            <time datetime={project.data.launchedDate.toISOString()}>
+              {project.data.launchedDate.toLocaleDateString('en-US', { dateStyle: 'long' })}
+            </time>
+          )}
+        </p>
+        <h1>{project.data.title}</h1>
+        <p class="dek">{project.data.description}</p>
+        <div class="actions">
+          <a class="chip" href={project.data.url} target="_blank" rel="noopener noreferrer">Visit project</a>
+          {project.data.repoUrl && (
+            <a class="chip" href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">Source</a>
+          )}
+        </div>
+      </header>
+
+      {project.data.image && (
+        <figure>
+          <img src={project.data.image} alt={project.data.imageAlt || ''} />
+        </figure>
+      )}
+
+      <Content />
+    </article>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .project-main {
+    padding: 2rem 0;
+  }
+
+  .project-detail {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 1.6rem;
+  }
+
+  .meta,
+  .actions {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    margin: 0.85rem 0 0.6rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .dek {
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+
+  .actions {
+    margin-bottom: 1.25rem;
+  }
+
+  figure {
+    margin: 0 0 1.2rem;
+  }
+
+  figure img {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+  }
+
+  :global(.project-detail p) {
+    margin: 0.9rem 0;
+  }
+
+  :global(.project-detail h2) {
+    margin-top: 1.6rem;
+  }
+
+  :global(.project-detail img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.25rem auto;
+  }
+</style>
