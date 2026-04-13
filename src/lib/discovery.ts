@@ -1,7 +1,9 @@
 import type { CollectionEntry } from 'astro:content';
 import {
   getPublishedPosts,
+  getPublishedProjects,
   getPostUrl,
+  getProjectLastmod,
   getPostsByCategory,
   getPostsByTag,
   getTagMap,
@@ -30,8 +32,10 @@ function postLastmod(post: CollectionEntry<'blog'>): Date {
 
 export async function getPublicPages(): Promise<PublicPage[]> {
   const posts = await getPublishedPosts();
+  const projects = await getPublishedProjects();
   const pages: PublicPage[] = [];
   const latestPostDate = latestDate(posts.map(postLastmod));
+  const latestProjectDate = latestDate(projects.map(getProjectLastmod).filter((date): date is Date => Boolean(date)));
 
   pages.push({
     path: '/',
@@ -48,6 +52,11 @@ export async function getPublicPages(): Promise<PublicPage[]> {
     path: '/search/',
     absoluteUrl: toAbsoluteUrl('/search/'),
     lastmod: latestPostDate,
+  });
+  pages.push({
+    path: '/projects/',
+    absoluteUrl: toAbsoluteUrl('/projects/'),
+    lastmod: latestProjectDate,
   });
 
   const { totalPages } = paginateArray(posts, 1);
@@ -106,4 +115,3 @@ export async function getPublicPages(): Promise<PublicPage[]> {
 export function formatSitemapDate(date?: Date): string | undefined {
   return date?.toISOString();
 }
-

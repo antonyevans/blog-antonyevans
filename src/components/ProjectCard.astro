@@ -1,0 +1,84 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+---
+
+<article class={`surface project-card${project.data.featured ? ' featured' : ''}`}>
+  {project.data.image && (
+    <img src={project.data.image} alt={project.data.imageAlt || ''} loading="lazy" />
+  )}
+  <div class="content">
+    <p class="meta">
+      <span class="chip">{project.data.status}</span>
+      <span>{project.data.category}</span>
+    </p>
+    <h2>{project.data.title}</h2>
+    <p>{project.data.description}</p>
+    <div class="actions">
+      <a class="chip" href={project.data.url} target="_blank" rel="noopener noreferrer">Visit project</a>
+      {project.data.repoUrl && (
+        <a class="chip" href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">Source</a>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: grid;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  .project-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .content {
+    padding: 1.2rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .meta,
+  .actions {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .actions {
+    margin-top: 0.25rem;
+  }
+
+  @media (min-width: 780px) {
+    .featured {
+      grid-column: span 2;
+    }
+  }
+</style>

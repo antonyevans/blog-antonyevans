@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export const POSTS_PER_PAGE = 12;
 
 export type BlogPost = CollectionEntry<'blog'>;
+export type Project = CollectionEntry<'projects'>;
 
 export function getPostUrl(post: BlogPost): string {
   return `/blog/${post.data.category}/${post.slug}/`;
@@ -21,8 +22,28 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
   return posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 }
 
+export async function getPublishedProjects(): Promise<Project[]> {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+
+  return projects.sort((a, b) => {
+    if (a.data.featured !== b.data.featured) {
+      return a.data.featured ? -1 : 1;
+    }
+
+    if (a.data.order !== b.data.order) {
+      return a.data.order - b.data.order;
+    }
+
+    return (b.data.launchedDate?.getTime() || 0) - (a.data.launchedDate?.getTime() || 0);
+  });
+}
+
 export function getPostLastmod(post: BlogPost): Date {
   return post.data.updatedDate || post.data.pubDate;
+}
+
+export function getProjectLastmod(project: Project): Date | undefined {
+  return project.data.launchedDate;
 }
 
 export function getRelatedPosts(post: BlogPost, posts: BlogPost[], limit = 3): BlogPost[] {

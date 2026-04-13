@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getPublishedProjects } from '../lib/content';
+import { SITE_NAME } from '../lib/site';
+
+const projects = await getPublishedProjects();
+const featuredProjects = projects.filter((project) => project.data.featured);
+const otherProjects = projects.filter((project) => !project.data.featured);
+---
+
+<Layout title={`Projects | ${SITE_NAME}`} description="Projects, tools, and experiments by Antony Evans." canonical="/projects/">
+  <SiteHeader />
+  <main class="container projects">
+    <section class="surface intro">
+      <p class="eyebrow">Projects</p>
+      <h1>Tools, systems, and experiments worth visiting.</h1>
+      <p>Current and past builds, linked directly to the thing itself.</p>
+    </section>
+
+    {projects.length > 0 ? (
+      <>
+        {featuredProjects.length > 0 && (
+          <section class="project-section">
+            <div class="section-head">
+              <h2>Featured</h2>
+            </div>
+            <div class="grid featured-grid">
+              {featuredProjects.map((project) => <ProjectCard project={project} />)}
+            </div>
+          </section>
+        )}
+
+        {otherProjects.length > 0 && (
+          <section class="project-section">
+            <div class="section-head">
+              <h2>More projects</h2>
+            </div>
+            <div class="grid">
+              {otherProjects.map((project) => <ProjectCard project={project} />)}
+            </div>
+          </section>
+        )}
+      </>
+    ) : (
+      <section class="surface empty">
+        <h2>Projects are coming soon.</h2>
+        <p>Project links are being gathered.</p>
+      </section>
+    )}
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .projects {
+    padding: 2rem 0;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .intro,
+  .empty {
+    padding: clamp(1.2rem, 3vw, 2rem);
+  }
+
+  .eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 0.5rem 0;
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    max-width: 20ch;
+  }
+
+  .intro p,
+  .empty p {
+    max-width: 58ch;
+    color: var(--muted);
+  }
+
+  .project-section {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .section-head h2,
+  .empty h2 {
+    margin: 0;
+  }
+
+  .grid {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  @media (min-width: 780px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .featured-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
