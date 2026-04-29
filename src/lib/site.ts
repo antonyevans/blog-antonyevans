@@ -5,7 +5,7 @@ const DEFAULT_SITE_NAME = 'Antony Evans';
 const DEFAULT_SITE_DESCRIPTION =
   'DTC operator turned AI builder. Writing on agentic commerce, AI systems, and the future of commerce.';
 const DEFAULT_SOCIAL_IMAGE = '/favicon.svg';
-const DEFAULT_ALLOWED_BOTS = ['Googlebot', 'Bingbot', 'OAI-SearchBot', 'GPTBot', 'ClaudeBot', 'CCBot'] as const;
+const DEFAULT_ALLOWED_BOTS = ['Googlebot', 'Bingbot', 'OAI-SearchBot', 'GPTBot', 'ClaudeBot', 'CCBot', 'PerplexityBot', 'anthropic-ai', 'Google-Extended'] as const;
 const DEFAULT_PRIVATE_PATHS = ['/drafts/', '/private/', '/admin/', '/preview/'] as const;
 
 function parseCsv(value?: string): string[] {
