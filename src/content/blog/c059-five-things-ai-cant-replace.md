@@ -2,8 +2,8 @@
 title: "Five Things AI Can't Replace \u2014 and Why Combining Them Is the Real Moat"
 description: "Five things AI can't replace: trust, context, distribution, taste, and liability. These aren't product categories. They're structural layers that become more valuable as AI gets better, not less."
 dek: ""
-pubDate: "2026-04-16"
-updatedDate: "2026-04-13"
+pubDate: "2026-04-30"
+updatedDate: "2026-04-16"
 category: engineering
 tags: ["engineering", "system-lens"]
 draft: false
