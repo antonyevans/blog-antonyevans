@@ -2,7 +2,8 @@
 title: "The COO's Job Is Building the AI Operating System"
 description: "The COO's job in an AI-first company is to build the operating system the company runs on. Here is what that OS looks like and how to build it."
 dek: ""
-pubDate: "2026-04-30"
+pubDate: "2026-05-06"
+updatedDate: "2026-04-30"
 category: engineering
 tags: ["engineering", "system-lens"]
 draft: false
