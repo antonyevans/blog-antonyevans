@@ -39,12 +39,48 @@ const latest = posts.slice(0, 3);
 
 <style>
   .home { padding: 2rem 0; display: grid; gap: 2rem; }
-  .hero { padding: clamp(1.2rem, 3vw, 2rem); }
-  .eyebrow { margin: 0; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .hero {
+    padding: clamp(1.4rem, 4vw, 3rem);
+    background:
+      linear-gradient(135deg, rgba(30, 58, 47, 0.96), rgba(30, 58, 47, 0.86)),
+      var(--primary);
+    border-color: color-mix(in oklab, var(--accent) 42%, var(--primary) 58%);
+    overflow: hidden;
+  }
+  .eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 700;
+  }
   h1 { margin: 0.5rem 0; font-size: clamp(2rem, 5vw, 3.3rem); max-width: 20ch; }
-  .hero p { max-width: 58ch; color: var(--muted); }
-  .cta-row { display: flex; gap: 0.6rem; }
+  .hero h1 { color: white; }
+  .hero p { max-width: 58ch; color: color-mix(in oklab, var(--bg) 88%, white 12%); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .hero .chip {
+    background: color-mix(in oklab, var(--bg) 88%, white 12%);
+    border-color: color-mix(in oklab, var(--accent) 58%, var(--bg) 42%);
+  }
   .section-head { display: flex; justify-content: space-between; align-items: baseline; }
   .section-head h2 { margin: 0; }
   .grid { display: grid; gap: 0.8rem; }
+
+  @media (max-width: 520px) {
+    .home { padding-top: 1.5rem; }
+    .hero { padding: 1.4rem; }
+    h1 {
+      max-width: 100%;
+      font-size: clamp(1.85rem, 10vw, 2.35rem);
+      overflow-wrap: break-word;
+    }
+    .cta-row {
+      display: grid;
+      justify-items: start;
+    }
+    .section-head {
+      gap: 1rem;
+      align-items: center;
+    }
+  }
 </style>

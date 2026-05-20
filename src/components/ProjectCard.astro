@@ -36,6 +36,13 @@ const projectUrl = getProjectUrl(project);
     display: grid;
     min-height: 100%;
     overflow: hidden;
+    transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .project-card:hover {
+    border-color: color-mix(in oklab, var(--accent) 58%, var(--line) 42%);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 42px rgba(30, 58, 47, 0.12);
   }
 
   .project-card img {

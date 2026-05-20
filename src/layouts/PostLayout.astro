@@ -89,7 +89,7 @@ const schema = {
 
 <style>
   .post-main { padding: 2rem 0; }
-  .prose { max-width: 52rem; margin: 0 auto; padding: 1.6rem; }
+  .prose { max-width: 52rem; margin: 0 auto; padding: clamp(1.25rem, 3vw, 2.25rem); }
   .meta {
     margin: 0;
     color: var(--muted);
@@ -100,8 +100,18 @@ const schema = {
     font-size: 0.9rem;
   }
 
-  h1 { margin: 0.85rem 0 0.6rem; font-size: clamp(2rem, 5vw, 3rem); }
-  .dek { color: var(--muted); margin: 0 0 1rem; }
+  h1 {
+    margin: 0.85rem 0 0.6rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    max-width: 16ch;
+  }
+  .dek {
+    color: var(--muted);
+    margin: 0 0 1rem;
+    font-size: 1.08rem;
+    border-left: 4px solid var(--accent);
+    padding-left: 0.85rem;
+  }
   .tags {
     margin-top: 1.5rem;
     display: flex;
@@ -143,9 +153,24 @@ const schema = {
   :global(.prose p) { margin: 0.9rem 0; }
   :global(.prose h2) { margin-top: 1.6rem; }
   :global(.prose code) {
-    background: color-mix(in oklab, var(--accent-soft) 65%, var(--bg) 35%);
+    background: color-mix(in oklab, var(--accent-soft) 68%, white 32%);
+    color: var(--primary);
     border-radius: 0.3rem;
     padding: 0.1rem 0.35rem;
+  }
+  :global(.prose pre) {
+    background: var(--primary);
+    color: var(--bg);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  :global(.prose blockquote) {
+    border-left: 4px solid var(--accent);
+    margin-left: 0;
+    padding: 0.1rem 0 0.1rem 1rem;
+    color: var(--muted);
+    background: color-mix(in oklab, var(--tan) 36%, transparent 64%);
   }
   :global(.prose img) {
     display: block;
