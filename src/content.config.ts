@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-export const BLOG_CATEGORIES = ['engineering', 'product', 'writing', 'notes', 'operator-insights', 'ai-tech-operator', 'the-search-grounded', 'system-lens'] as const;
+export const BLOG_CATEGORIES = ['engineering', 'product', 'writing', 'notes', 'operator-insights', 'ai-tech-operator', 'the-search-grounded', 'system-lens', 'ai-native-operating-model'] as const;
 
 const blog = defineCollection({
   schema: z.object({
