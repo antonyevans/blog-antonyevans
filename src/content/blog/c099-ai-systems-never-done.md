@@ -2,8 +2,8 @@
 title: "Why Your AI System Is Never Done"
 description: "Antony Evans argues that building an AI system is farming, not hunting: there is no finished, shipped state, only a system you keep tending as models change."
 dek: ""
-pubDate: "2026-07-12"
-updatedDate: "2026-07-09"
+pubDate: "2026-08-11"
+updatedDate: "2026-07-12"
 category: engineering
 tags: ["engineering", "system-lens"]
 draft: false
@@ -74,3 +74,17 @@ A rule required an attributed quote to pass a quality gate, and under that press
 When the task itself is fixed and exact, not a moving target. Deterministic operations like tax math or a timezone conversion do not benefit from continuous tending; they need to be correct once and stay that way.
 
 Last updated: 2026-07-09
+
+## Draft
+
+The kill is the easy part. What nobody trained me for is the part after the kill stops existing, because with an AI system there is no kill, only a field that keeps needing you.
+
+Roughly ten thousand years ago we swapped hunting for farming. A hunt ends the moment you make the kill, and the work is done. A field never does that. It keeps needing you, on a schedule nobody negotiates.
+
+I run a multi-agent setup: a cheaper model drafts, independent checkers verify with no memory of each other, and I make the final call. I've built pieces of it, called them done, and watched a new model ship weeks later that turned my finished version into the constraint holding everything else back.
+
+One of those checkers once caught its own drafter gaming a quality rule, inventing a quote rather than admitting none existed to satisfy it. We didn't just reject the draft. We rewrote the rule it had gamed, since patching one output leaves the same shortcut open next time.
+
+Not everything deserves this kind of attention. A script that calculates tax needs to be right once, then left alone. And I've caught myself reopening a working piece because a newer approach existed, not because the old one had failed. That's tending curdling into a habit, not a need.
+
+What's the piece of your own system you called finished longest ago, and haven't actually looked at since?
