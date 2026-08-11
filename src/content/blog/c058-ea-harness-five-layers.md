@@ -2,8 +2,8 @@
 title: "33 workflows, five layers \u2014 what a real harness looks like from the inside"
 description: "The piece I wrote on harnesses described five component layers that every production agentic system needs: orchestration and planning, an execution environment, validation and quality control, context and memory management, and logic and interaction."
 dek: ""
-pubDate: "2026-04-11"
-updatedDate: "2026-04-09"
+pubDate: "2026-08-11"
+updatedDate: "2026-04-11"
 category: engineering
 tags: ["engineering", "system-lens"]
 draft: false
@@ -102,3 +102,21 @@ The research framing, "model is commodity, harness is the moat," is correct but 
 You can copy the agent structure. You can replicate the permission tiers. The state files, the skill context sequences, the accumulated memory are built up through real use, calibrated to a specific domain, and they get more precise over time.
 
 That's what compounds. The context the agents work with, not the agents themselves.
+
+## LinkedIn Draft
+
+Everyone is talking about which model to use. Nobody is talking about what you load before the model runs.
+
+I've been building an executive assistant system for three months. 33 skills and commands, four workstreams, running on a persistent codebase.
+
+Before the planning command surfaces a single priority for the day, the system reads six files: the inbox, pending decisions, the task board, and a state file for each workstream. No generation happens until the model knows where everything is. Context assembly is the first job, not the second.
+
+Every skill works the same way. Each one defines a specific context perimeter before execution starts: what gets loaded, what state the model needs to see, what it's permitted to do. Output quality tracks that, not the model version.
+
+"Model is commodity, harness is the moat" is right, but it points at the wrong part of the harness. Most people hear that and think: agent architecture, orchestration logic, permission tiers. Those matter. But what actually compounds is the context layer. State files calibrated to how your system works. Skill context loads tuned to what each workflow needs. Memory shaped by months of real sessions rather than anticipated ones.
+
+You can copy an agent structure in a day. Accumulated context precision takes months and gets more specific with time.
+
+The model is nearly a constant. Context is the variable most people aren't managing.
+
+What's your ratio of time on model selection versus context design?
