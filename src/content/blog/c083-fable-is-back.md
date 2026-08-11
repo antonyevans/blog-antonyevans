@@ -2,7 +2,8 @@
 title: "Fable is back \u2014 what using an expensive, deeply capable model teaches about discriminating AI use"
 description: "Fable is back. And it's changing how I think about thinking."
 dek: ""
-pubDate: "2026-07-02"
+pubDate: "2026-08-11"
+updatedDate: "2026-07-02"
 category: engineering
 tags: ["engineering", "system-lens"]
 draft: false
@@ -23,3 +24,10 @@ Fable doesn't work like that. It's capable enough, and runs deep and long enough
 For me, that's the shift. The scarce input isn't compute anymore, it's a clear question. My job is moving from executing fast to deciding where the deep thinking actually needs to happen.
 
 Who else is experiencing something like this?
+
+## Self-Critique (content-quality eval gate, independent judge)
+- C1 no banned AI tells: PASS
+- C2 matches Antony's voice: PASS
+- C3 claims grounded (personal/experiential only): PASS
+- C4 hook earns the read: PASS
+- C5 one idea paid off: PASS after revision (dropped the universal "direction this goes" industry claim; reframed the close as explicitly personal — "For me, that's the shift")
