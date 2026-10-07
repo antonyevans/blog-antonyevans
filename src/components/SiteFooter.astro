@@ -1,18 +1,76 @@
 <footer class="site-footer">
   <div class="container">
-    <p>© {new Date().getFullYear()} Antony Evans. Built with Astro and Cloudflare Pages.</p>
+    <p class="pitch">Get the structural view, not the hype.</p>
+    <div class="actions">
+      <a class="button on-blue" href="/rss.xml">Subscribe via RSS</a>
+      <a class="button button-ghost" href="https://www.linkedin.com/in/antonyevans/" rel="me">Follow on LinkedIn</a>
+    </div>
+    <div class="base">
+      <span>© {new Date().getFullYear()} Antony Evans</span>
+      <span class="links">
+        <a href="/blog/">Writing</a>
+        <a href="/projects/">Projects</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/antonyevans" rel="me">GitHub</a>
+      </span>
+    </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    margin-top: 4rem;
-    border-top: 1px solid color-mix(in oklab, var(--accent) 28%, var(--primary) 72%);
-    color: color-mix(in oklab, var(--bg) 82%, white 18%);
-    background: var(--primary);
+    margin-top: 6rem;
+    background: var(--accent);
+    color: #ffffff;
   }
 
   .site-footer .container {
-    padding: 1.5rem 0 2.5rem;
+    padding-block: 4.5rem 2.5rem;
   }
+
+  .pitch {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    max-width: 14ch;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .on-blue {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: var(--ink);
+  }
+
+  .on-blue:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
+    color: var(--ink);
+  }
+
+  .button-ghost { color: #ffffff; }
+
+  .base {
+    margin-top: 4.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--accent-on-dark);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    font-size: 0.875rem;
+  }
+
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .base a { color: #ffffff; text-decoration: none; }
+  .base a:hover { text-decoration: underline; color: #ffffff; }
 </style>

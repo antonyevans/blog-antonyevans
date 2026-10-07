@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getProjectUrl } from '../lib/content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  /** Position in the list; picks the tile's colour so neighbours differ. */
+  index?: number;
+  showActions?: boolean;
+}
+
+const { project, index = 0, showActions = false } = Astro.props;
+const projectUrl = getProjectUrl(project);
+const monogram = project.data.title
+  .split(/\s+/)
+  .map((word) => word.charAt(0))
+  .join('')
+  .slice(0, 3)
+  .toUpperCase();
+const tones = ['tone-accent', 'tone-ink', 'tone-soft'];
+const tone = tones[index % tones.length];
+---
+
+<article class="tile">
+  <a class={`art ${tone}`} href={projectUrl} tabindex="-1" aria-hidden="true">
+    {project.data.image ? (
+      <img src={project.data.image} alt="" loading="lazy" />
+    ) : (
+      <span class="mono">{monogram}</span>
+    )}
+  </a>
+  <p class="kicker">{project.data.category} · {project.data.status}</p>
+  <h3><a href={projectUrl}>{project.data.title}</a></h3>
+  <p class="desc">{project.data.description}</p>
+  {showActions && (
+    <p class="actions">
+      <a href={project.data.url} target="_blank" rel="noopener noreferrer">Visit project ↗</a>
+      {project.data.repoUrl && (
+        <a href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">Source ↗</a>
+      )}
+    </p>
+  )}
+</article>
+
+<style>
+  .tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .art {
+    aspect-ratio: 4 / 3;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem;
+    text-decoration: none;
+    transition: transform 200ms ease;
+  }
+
+  .art:hover { transform: translateY(-3px); }
+
+  .art img {
+    width: calc(100% + 2.5rem);
+    height: calc(100% + 2.5rem);
+    margin: -1.25rem;
+    object-fit: cover;
+  }
+
+  .tone-accent { background: var(--accent); color: #ffffff; }
+  .tone-ink { background: var(--ink); color: var(--bg); }
+  .tone-soft { background: var(--accent-soft); color: var(--ink); }
+  .art:hover { color: inherit; }
+  .tone-accent:hover { color: #ffffff; }
+  .tone-ink:hover { color: var(--bg); }
+
+  .mono {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.75rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.875rem;
+    letter-spacing: -0.03em;
+  }
+
+  h3 a { text-decoration: none; }
+  h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; color: var(--ink); }
+
+  .desc {
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+
+  .actions {
+    margin: 0.25rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-weight: 600;
+  }
+
+  .actions a { color: var(--accent); text-decoration: none; }
+  .actions a:hover { text-decoration: underline; }
+</style>

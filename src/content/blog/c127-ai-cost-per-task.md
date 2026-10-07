@@ -7,6 +7,8 @@ category: system-lens
 tags: ["system-lens", "ai-cost-per-task"]
 draft: false
 primary_keyword: "AI cost per task"
+leadStat: "13×"
+leadStatLabel: "cheaper per task, every year, at fixed quality"
 ---
 
 AI is getting cheaper and more expensive at once. Epoch AI finds the cost of hitting a fixed benchmark score has fallen about 47% a quarter since 2023, roughly 13x a year. MIT FutureTech finds the cost of running the top frontier model rising 3-18x a year. For coding work, the drop is much slower.

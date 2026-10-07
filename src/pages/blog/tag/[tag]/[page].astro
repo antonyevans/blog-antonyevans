@@ -2,6 +2,7 @@
 import Layout from '../../../../layouts/Layout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
+import ListingHeader from '../../../../components/ListingHeader.astro';
 import PostCard from '../../../../components/PostCard.astro';
 import Pagination from '../../../../components/Pagination.astro';
 import { getPublishedPosts, paginateArray, pageNumbers, slugify } from '../../../../lib/content';
@@ -32,8 +33,8 @@ const { items, totalPages } = paginateArray(taggedPosts, currentPage);
 
 <Layout title={`#${tag} posts | ${SITE_NAME}`} description={`Posts tagged ${tag}.`} canonical={`/blog/tag/${tag}/${currentPage}/`}>
   <SiteHeader />
-  <main class="container listing">
-    <h1>Tag: #{tag}</h1>
+  <main class="container">
+    <ListingHeader title={`#${tag}`} kicker={`Tag · ${taggedPosts.length} ${taggedPosts.length === 1 ? 'essay' : 'essays'}`} />
     <div class="post-list">
       {items.map((post) => <PostCard post={post} />)}
     </div>
@@ -41,8 +42,3 @@ const { items, totalPages } = paginateArray(taggedPosts, currentPage);
   </main>
   <SiteFooter />
 </Layout>
-
-<style>
-  .listing { padding: 2rem 0; }
-  .post-list { display: grid; gap: 0.8rem; }
-</style>

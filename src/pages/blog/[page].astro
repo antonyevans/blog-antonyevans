@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import ListingHeader from '../../components/ListingHeader.astro';
 import PostCard from '../../components/PostCard.astro';
 import Pagination from '../../components/Pagination.astro';
 import { getPublishedPosts, pageNumbers, paginateArray } from '../../lib/content';
@@ -22,8 +23,8 @@ const { items, totalPages } = paginateArray(allPosts, currentPage);
 
 <Layout title={`Blog page ${currentPage} | ${SITE_NAME}`} description="Paginated blog archive." canonical={`/blog/${currentPage}/`}>
   <SiteHeader />
-  <main class="container listing">
-    <h1>Blog archive</h1>
+  <main class="container">
+    <ListingHeader title="Writing" kicker={`Page ${currentPage} of ${totalPages}`} />
     <div class="post-list">
       {items.map((post) => <PostCard post={post} />)}
     </div>
@@ -31,8 +32,3 @@ const { items, totalPages } = paginateArray(allPosts, currentPage);
   </main>
   <SiteFooter />
 </Layout>
-
-<style>
-  .listing { padding: 2rem 0; }
-  .post-list { display: grid; gap: 0.8rem; }
-</style>

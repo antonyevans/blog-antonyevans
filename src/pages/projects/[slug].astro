@@ -1,5 +1,5 @@
 ---
-import { getPublishedProjects, getProjectUrl } from '../../lib/content';
+import { formatPostDate, getPublishedProjects, getProjectUrl } from '../../lib/content';
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
@@ -36,25 +36,25 @@ const schema = {
   schema={schema}>
   <SiteHeader />
   <main class="container project-main">
-    <article class="surface project-detail">
-      <header>
+    <article>
+      <header class="project-header">
         <p class="meta">
-          <span class="chip">{project.data.status}</span>
+          <span class="status">{project.data.status}</span>
           <span>{project.data.category}</span>
           {project.data.launchedDate && (
             <time datetime={project.data.launchedDate.toISOString()}>
-              {project.data.launchedDate.toLocaleDateString('en-US', { dateStyle: 'long' })}
+              {formatPostDate(project.data.launchedDate, 'long')}
             </time>
           )}
         </p>
         <h1>{project.data.title}</h1>
         <p class="dek">{project.data.description}</p>
-        <div class="actions">
-          <a class="chip" href={project.data.url} target="_blank" rel="noopener noreferrer">Visit project</a>
+        <p class="actions">
+          <a class="button" href={project.data.url} target="_blank" rel="noopener noreferrer">Visit project ↗</a>
           {project.data.repoUrl && (
-            <a class="chip" href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">Source</a>
+            <a class="button button-ghost" href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">Source ↗</a>
           )}
-        </div>
+        </p>
       </header>
 
       {project.data.image && (
@@ -63,73 +63,69 @@ const schema = {
         </figure>
       )}
 
-      <Content />
+      <div class="project-body">
+        <Content />
+      </div>
+      <p class="back"><a href="/projects/">← All projects</a></p>
     </article>
   </main>
   <SiteFooter />
 </Layout>
 
 <style>
-  .project-main {
-    padding: 2rem 0;
-  }
+  .project-main { padding-block: 3rem 0; }
 
-  .project-detail {
-    max-width: 52rem;
-    margin: 0 auto;
-    padding: 1.6rem;
-  }
+  .project-header { padding-bottom: 2.5rem; border-bottom: 3px solid var(--ink); }
 
-  .meta,
-  .actions {
+  .meta {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
-  .meta {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
+  .status { background: var(--ink); color: var(--bg); padding: 0.25rem 0.6rem; }
 
   h1 {
-    margin: 0.85rem 0 0.6rem;
-    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 1.5rem 0 0;
+    font-size: clamp(2.8rem, 7vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
   }
 
   .dek {
-    color: var(--muted);
-    margin: 0 0 1rem;
+    margin: 1.5rem 0 0;
+    max-width: 50ch;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    line-height: 1.45;
+    color: var(--ink-2);
   }
 
-  .actions {
-    margin-bottom: 1.25rem;
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
+
+  figure { margin: 2.5rem 0 0; }
+  figure img { width: 100%; border-radius: 4px; }
+
+  .project-body {
+    max-width: 44rem;
+    margin: 2.5rem auto 0;
+    font-size: 1.1875rem;
+    line-height: 1.7;
   }
 
-  figure {
-    margin: 0 0 1.2rem;
-  }
+  .back { max-width: 44rem; margin: 3rem auto 0; font-weight: 600; }
+  .back a { color: var(--accent); text-decoration: none; }
 
-  figure img {
-    width: 100%;
-    border: 1px solid var(--line);
-    border-radius: 0.9rem;
-  }
-
-  :global(.project-detail p) {
-    margin: 0.9rem 0;
-  }
-
-  :global(.project-detail h2) {
-    margin-top: 1.6rem;
-  }
-
-  :global(.project-detail img) {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 1.25rem auto;
-  }
+  :global(.project-body > :first-child) { margin-top: 0; }
+  :global(.project-body p) { margin: 1.1rem 0; }
+  :global(.project-body h2) { margin: 2.5rem 0 0.75rem; font-size: clamp(1.75rem, 3vw, 2.25rem); }
+  :global(.project-body li::marker) { color: var(--accent); }
+  :global(.project-body code) { background: var(--accent-soft); border-radius: 3px; padding: 0.1rem 0.35rem; font-size: 0.9em; }
+  :global(.project-body img) { display: block; max-width: 100%; height: auto; margin: 1.75rem auto; border-radius: 4px; }
 </style>

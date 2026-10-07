@@ -112,3 +112,68 @@ export function paginateArray<T>(items: T[], page: number, perPage = POSTS_PER_P
 export function pageNumbers(totalPages: number): number[] {
   return Array.from({ length: totalPages }, (_, i) => i + 1);
 }
+
+const CATEGORY_LABELS: Record<string, string> = {
+  engineering: 'Engineering',
+  product: 'Product',
+  writing: 'Writing',
+  notes: 'Notes',
+  'operator-insights': 'Operator insights',
+  'ai-tech-operator': 'AI tech operator',
+  'the-search-grounded': 'The search, grounded',
+  'system-lens': 'System lens',
+  'ai-native-operating-model': 'AI-native operating model',
+  'grounded-practitioner': 'Grounded practitioner',
+  'verify-your-verifiers': 'Verify your verifiers',
+  'own-your-brain-verify-your-verifiers': 'Own your brain',
+  'own-your-brain': 'Own your brain',
+  'ai-native-operating-model-grounded-practitioner': 'AI-native operating model',
+};
+
+export function getCategoryLabel(category: string): string {
+  if (CATEGORY_LABELS[category]) {
+    return CATEGORY_LABELS[category];
+  }
+
+  const words = category.replace(/-/g, ' ');
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
+export function getCategoryUrl(category: string): string {
+  return `/blog/category/${category}/1/`;
+}
+
+export interface Topic {
+  category: string;
+  label: string;
+  count: number;
+  url: string;
+}
+
+const TOPIC_ORDER = ['system-lens', 'ai-native-operating-model', 'own-your-brain', 'engineering', 'ai-tech-operator', 'product', 'writing', 'notes'];
+
+/** Categories with at least `minPosts` posts, in editorial order, for topic navigation. */
+export function getTopics(posts: BlogPost[], minPosts = 2): Topic[] {
+  const counts = new Map<string, number>();
+  for (const post of posts) {
+    counts.set(post.data.category, (counts.get(post.data.category) || 0) + 1);
+  }
+
+  const rank = (category: string) => {
+    const index = TOPIC_ORDER.indexOf(category);
+    return index === -1 ? TOPIC_ORDER.length : index;
+  };
+
+  return Array.from(counts.entries())
+    .filter(([, count]) => count >= minPosts)
+    .sort((a, b) => rank(a[0]) - rank(b[0]) || b[1] - a[1])
+    .map(([category, count]) => ({ category, label: getCategoryLabel(category), count, url: getCategoryUrl(category) }));
+}
+
+export function formatPostDate(date: Date, style: 'short' | 'medium' | 'long' = 'medium'): string {
+  if (style === 'short') {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+  }
+
+  return date.toLocaleDateString('en-US', { dateStyle: style, timeZone: 'UTC' });
+}

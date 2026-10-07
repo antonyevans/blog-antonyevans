@@ -2,117 +2,57 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectTile from '../components/ProjectTile.astro';
 import { getPublishedProjects } from '../lib/content';
 import { SITE_NAME } from '../lib/site';
 
 const projects = await getPublishedProjects();
-const featuredProjects = projects.filter((project) => project.data.featured);
-const otherProjects = projects.filter((project) => !project.data.featured);
 ---
 
 <Layout title={`Projects | ${SITE_NAME}`} description="Projects, tools, and experiments by Antony Evans." canonical="/projects/">
   <SiteHeader />
   <main class="container projects">
-    <section class="surface intro">
-      <p class="eyebrow">Projects</p>
-      <h1>Tools, systems, and experiments worth visiting.</h1>
-      <p>Current and past builds, linked directly to the thing itself.</p>
-    </section>
+    <header class="intro">
+      <h1 class="page-title">Building</h1>
+      <p class="lede">Tools, systems and experiments — linked directly to the thing itself.</p>
+    </header>
 
     {projects.length > 0 ? (
-      <>
-        {featuredProjects.length > 0 && (
-          <section class="project-section">
-            <div class="section-head">
-              <h2>Featured</h2>
-            </div>
-            <div class="grid featured-grid">
-              {featuredProjects.map((project) => <ProjectCard project={project} />)}
-            </div>
-          </section>
-        )}
-
-        {otherProjects.length > 0 && (
-          <section class="project-section">
-            <div class="section-head">
-              <h2>More projects</h2>
-            </div>
-            <div class="grid">
-              {otherProjects.map((project) => <ProjectCard project={project} />)}
-            </div>
-          </section>
-        )}
-      </>
+      <div class="grid">
+        {projects.map((project, index) => <ProjectTile project={project} index={index} showActions />)}
+      </div>
     ) : (
-      <section class="surface empty">
-        <h2>Projects are coming soon.</h2>
-        <p>Project links are being gathered.</p>
-      </section>
+      <p class="lede">Projects are coming soon.</p>
     )}
   </main>
   <SiteFooter />
 </Layout>
 
 <style>
-  .projects {
-    padding: 2rem 0;
-    display: grid;
-    gap: 2rem;
-  }
+  .projects { padding-block: 3rem 0; }
 
-  .intro,
-  .empty {
-    padding: clamp(1.2rem, 3vw, 2rem);
-  }
-
-  .eyebrow {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-
-  h1 {
-    margin: 0.5rem 0;
-    font-size: clamp(2rem, 5vw, 3.3rem);
-    max-width: 20ch;
-  }
-
-  .intro p,
-  .empty p {
-    max-width: 58ch;
-    color: var(--muted);
-  }
-
-  .project-section {
-    display: grid;
-    gap: 0.8rem;
-  }
-
-  .section-head {
+  .intro {
     display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
     justify-content: space-between;
-    align-items: baseline;
+    gap: 1.5rem 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid var(--ink);
   }
 
-  .section-head h2,
-  .empty h2 {
+  .lede {
     margin: 0;
+    max-width: 36ch;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--ink-2);
   }
 
   .grid {
     display: grid;
-    gap: 0.8rem;
-  }
-
-  @media (min-width: 780px) {
-    .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .featured-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+    gap: 3rem 2.5rem;
+    margin-top: 2.5rem;
   }
 </style>

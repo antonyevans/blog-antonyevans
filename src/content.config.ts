@@ -15,6 +15,9 @@ const blog = defineCollection({
     private: z.boolean().default(false),
     heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),
+    // Optional big-number treatment when the post leads the homepage.
+    leadStat: z.string().optional(),
+    leadStatLabel: z.string().optional(),
   }),
 });
 
