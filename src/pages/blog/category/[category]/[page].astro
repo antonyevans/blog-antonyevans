@@ -2,9 +2,10 @@
 import Layout from '../../../../layouts/Layout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
+import ListingHeader from '../../../../components/ListingHeader.astro';
 import PostCard from '../../../../components/PostCard.astro';
 import Pagination from '../../../../components/Pagination.astro';
-import { getPublishedPosts, paginateArray, pageNumbers } from '../../../../lib/content';
+import { getCategoryLabel, getPublishedPosts, paginateArray, pageNumbers } from '../../../../lib/content';
 import { SITE_NAME } from '../../../../lib/site';
 
 export async function getStaticPaths() {
@@ -28,12 +29,17 @@ const currentPage = Number(Astro.params.page ?? '1');
 const allPosts = await getPublishedPosts();
 const categoryPosts = allPosts.filter((post) => post.data.category === category);
 const { items, totalPages } = paginateArray(categoryPosts, currentPage);
+const label = getCategoryLabel(category);
 ---
 
-<Layout title={`${category} posts | ${SITE_NAME}`} description={`Posts in ${category}.`} canonical={`/blog/category/${category}/${currentPage}/`}>
+<Layout title={`${label} | ${SITE_NAME}`} description={`Posts in ${label}.`} canonical={`/blog/category/${category}/${currentPage}/`}>
   <SiteHeader />
-  <main class="container listing">
-    <h1>Category: {category}</h1>
+  <main class="container">
+    <ListingHeader
+      title={label}
+      kicker={totalPages > 1 ? `Topic · ${categoryPosts.length} essays · page ${currentPage} of ${totalPages}` : `Topic · ${categoryPosts.length} ${categoryPosts.length === 1 ? 'essay' : 'essays'}`}
+      currentCategory={category}
+    />
     <div class="post-list">
       {items.map((post) => <PostCard post={post} />)}
     </div>
@@ -41,8 +47,3 @@ const { items, totalPages } = paginateArray(categoryPosts, currentPage);
   </main>
   <SiteFooter />
 </Layout>
-
-<style>
-  .listing { padding: 2rem 0; }
-  .post-list { display: grid; gap: 0.8rem; }
-</style>

@@ -3,28 +3,131 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { SITE_NAME } from '../lib/site';
+
+const stats = [
+  { value: '$50M', label: 'DTC revenue scaled as COO' },
+  { value: '$42M', label: 'raised' },
+  { value: '500k', label: 'downloads of an AI doctor app' },
+  { value: '7 yrs', label: 'as COO, through Chapter 11 to profitability' },
+];
 ---
 
 <Layout title={`About | ${SITE_NAME}`} description="DTC operator turned AI builder. 7 years COO at Wild Earth. YC, INSEAD, Cambridge." canonical="/about/">
   <SiteHeader />
   <main class="container about">
-    <article class="surface">
-      <h1>About</h1>
-      <p>Most DTC commentary is tactical. Most AI commentary is generic. I&#39;m interested in what happens at the intersection.</p>
-      <p>I spent 7 years as COO scaling a DTC consumer brand &mdash; $50M revenue, $42M raised, led the company through Chapter 11 to profitability. Before that: YC, Bain, INSEAD, and a decade founding things (including an AI doctor app with 500k downloads). Now I&#39;m building AI systems and watching everything I learned about commerce change at the infrastructure level.</p>
-      <p>Agentic AI is doing more to DTC than automating workflows. It&#39;s changing who the customer is, how acquisition works, what brand loyalty means, and which business models survive. Most operators aren&#39;t ready for it. Most AI builders don&#39;t understand the commerce layer. I sit in the gap between them.</p>
-      <p>Right now: building AI systems and figuring out what to build next in this space. Writing about the shifts most DTC operators are still catching up to.</p>
-      <p>If you&#39;re a DTC founder or operator trying to understand what agentic AI actually means for your business &mdash; <a href="https://www.linkedin.com/in/antonyevans/">I&#39;d like to connect</a>.</p>
-      <p class="credentials">Cambridge Mathematics &nbsp;|&nbsp; INSEAD MBA &nbsp;|&nbsp; YC Alum</p>
-      <p>Subscribe via <a href="/rss.xml">RSS</a> or browse all posts on the <a href="/blog/">writing page</a>.</p>
-    </article>
+    <header class="intro">
+      <h1 class="page-title">About</h1>
+      <p class="lede">Most DTC commentary is tactical. Most AI commentary is generic. I&#39;m interested in what happens at the intersection.</p>
+    </header>
+
+    <dl class="stats">
+      {stats.map((stat) => (
+        <div>
+          <dt>{stat.label}</dt>
+          <dd>{stat.value}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="body">
+      <p class="credentials">Cambridge Mathematics<br />INSEAD MBA<br />YC Alum</p>
+      <div class="text">
+        <p>I spent 7 years as COO scaling a DTC consumer brand &mdash; $50M revenue, $42M raised, led the company through Chapter 11 to profitability. Before that: YC, Bain, INSEAD, and a decade founding things (including an AI doctor app with 500k downloads). Now I&#39;m building AI systems and watching everything I learned about commerce change at the infrastructure level.</p>
+        <p>Agentic AI is doing more to DTC than automating workflows. It&#39;s changing who the customer is, how acquisition works, what brand loyalty means, and which business models survive. Most operators aren&#39;t ready for it. Most AI builders don&#39;t understand the commerce layer. I sit in the gap between them.</p>
+        <p>Right now: building AI systems and figuring out what to build next in this space. Writing about the shifts most DTC operators are still catching up to.</p>
+        <p>If you&#39;re a DTC founder or operator trying to understand what agentic AI actually means for your business &mdash; <a href="https://www.linkedin.com/in/antonyevans/">I&#39;d like to connect</a>.</p>
+        <p class="actions">
+          <a class="button" href="https://www.linkedin.com/in/antonyevans/">Connect on LinkedIn</a>
+          <a class="button button-ghost" href="/blog/">Read the writing</a>
+          <a class="button button-ghost" href="/rss.xml">RSS</a>
+        </p>
+      </div>
+    </div>
   </main>
   <SiteFooter />
 </Layout>
 
 <style>
-  .about { padding: 2rem 0; }
-  article { max-width: 48rem; margin: 0 auto; padding: 1.5rem; }
-  h1 { margin-top: 0; }
-  .credentials { color: var(--muted); font-size: 0.9rem; }
+  .about { padding-block: 3rem 0; }
+
+  .intro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .lede {
+    margin: 0;
+    flex: 1 1 24rem;
+    max-width: 30ch;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+
+  .stats {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    border-top: 3px solid var(--ink);
+  }
+
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    padding: 2rem 1.5rem 2rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stats dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 4.5rem;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+  }
+
+  .stats dt { color: var(--ink-2); }
+
+  .body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem 4rem;
+    margin-top: 3.5rem;
+  }
+
+  .credentials {
+    flex: 1 1 12rem;
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 2;
+    color: var(--muted);
+  }
+
+  .text {
+    flex: 999 1 32rem;
+    min-width: 0;
+    max-width: 44rem;
+    font-size: 1.1875rem;
+    line-height: 1.7;
+  }
+
+  .text p:first-child { margin-top: 0; }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
 </style>
